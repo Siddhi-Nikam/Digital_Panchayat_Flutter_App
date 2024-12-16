@@ -1,4 +1,3 @@
-import 'package:digitalpanchayat/user/outter%20pages/userdrawer.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,9 +6,7 @@ import '../../../reusable component/file.text.dart';
 import '../../../reusable component/file_picking.dart';
 
 class BirthCertificate extends StatefulWidget {
-  final String token;
-
-  const BirthCertificate({super.key, required this.token});
+  const BirthCertificate({super.key});
 
   @override
   State<BirthCertificate> createState() {
@@ -82,9 +79,6 @@ class BirthCertificateState extends State<BirthCertificate> {
         ),
         backgroundColor: Colors.blue,
         iconTheme: IconThemeData(color: Colors.white),
-      ),
-      drawer: AppDrawer(
-        token: widget.token, // Access the token through the widget property.
       ),
       body: SingleChildScrollView(
         child: Column(

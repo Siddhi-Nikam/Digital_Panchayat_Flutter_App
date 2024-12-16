@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
-import '../../outter pages/userdrawer.dart';
 import 'package:http/http.dart' as http;
 
 class RegiBirth extends StatefulWidget {
-  final String token;
-  const RegiBirth({super.key, required this.token});
+  const RegiBirth({
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -81,9 +81,6 @@ class RegiBirthState extends State<RegiBirth> {
           ),
           backgroundColor: Colors.blue,
           iconTheme: IconThemeData(color: Colors.white),
-        ),
-        drawer: AppDrawer(
-          token: widget.token,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

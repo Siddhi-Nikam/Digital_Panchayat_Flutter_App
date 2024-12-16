@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../outter pages/userdrawer.dart';
 import 'applications pages/birth.certificate.dart';
+import 'applications pages/marriage_regi.dart';
 import 'applications pages/regi_birth.dart';
 
 class Apply extends StatefulWidget {
@@ -38,12 +39,8 @@ class ApplyState extends State<Apply> {
             ),
             title: const Text("जन्म नोंदणी"),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RegiBirth(
-                            token: widget.token,
-                          )));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RegiBirth()));
             },
           ),
           const Divider(
@@ -56,12 +53,8 @@ class ApplyState extends State<Apply> {
             ),
             title: const Text("जन्माचा दाखला"),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BirthCertificate(
-                            token: widget.token,
-                          )));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BirthCertificate()));
             },
           ),
           const Divider(height: 1),
@@ -80,7 +73,10 @@ class ApplyState extends State<Apply> {
               color: Colors.blueAccent,
             ),
             title: const Text("विवाह प्रमाणपत्र"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MarriageRegi()));
+            },
           ),
           const Divider(height: 1),
           ListTile(
