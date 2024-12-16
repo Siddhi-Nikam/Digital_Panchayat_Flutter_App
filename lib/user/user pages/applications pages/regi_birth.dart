@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
 import '../../outter pages/userdrawer.dart';
+import 'package:http/http.dart' as http;
 
 class RegiBirth extends StatefulWidget {
   final String token;
@@ -15,22 +16,59 @@ class RegiBirth extends StatefulWidget {
 }
 
 class RegiBirthState extends State<RegiBirth> {
-  String _fileNames = "No file selected";
+  final Map<String, dynamic> _fileNames = {
+    'applicantId': "No file selected",
+    'LC': "No file selected",
+    'fatherId': "No file selected",
+    'motherId': "No file selected",
+    'hospitalCertificate': "No file selected",
+    'parentAffidavit': "No file selected",
+  };
   FilePickerResult? result; // Make the result nullable
 
   // Function to pick a single file
-  Future _pickFile() async {
+  Future _pickFile(String key) async {
     result = await FilePicker.platform.pickFiles();
 
     if (result != null && result!.files.isNotEmpty) {
       PlatformFile file = result!.files.first;
       setState(() {
-        _fileNames = file.name;
+        _fileNames[key] = file.name;
       });
     } else {
       setState(() {
-        _fileNames = "No file selected";
+        _fileNames[key] = "No file selected";
       });
+    }
+  }
+
+  Future<void> _submitFiles() async {
+    try {
+      // API endpoint
+      final url = Uri.parse("");
+
+      // Prepare the request
+      var request = http.MultipartRequest('POST', url);
+
+      // Add files to the request
+      for (var entry in _fileNames.entries) {
+        if (entry.value != "No file selected") {
+          request.files.add(
+            await http.MultipartFile.fromPath(entry.key, entry.value),
+          );
+        }
+      }
+
+      // Send the request
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print("Files uploaded successfully!");
+      } else {
+        print("Failed to upload files. Error: ${response.reasonPhrase}");
+      }
+    } catch (e) {
+      print("Error while submitting files: $e");
     }
   }
 
@@ -68,9 +106,9 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames,
+                fileName: _fileNames["applicantId"]!,
                 onPickFile: () {
-                  _pickFile();
+                  _pickFile("applicantId");
                 },
               ),
               //2
@@ -84,9 +122,9 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames,
+                fileName: _fileNames['LC']!,
                 onPickFile: () {
-                  _pickFile();
+                  _pickFile("LC");
                 },
               ),
               //3
@@ -100,9 +138,9 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames,
+                fileName: _fileNames["fatherId"]!,
                 onPickFile: () {
-                  _pickFile();
+                  _pickFile("fatherId");
                 },
               ),
               //4
@@ -116,9 +154,9 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames,
+                fileName: _fileNames['motherId']!,
                 onPickFile: () {
-                  _pickFile();
+                  _pickFile("motherId");
                 },
               ),
               //5
@@ -132,9 +170,9 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames,
+                fileName: _fileNames['hospitalCertificate']!,
                 onPickFile: () {
-                  _pickFile();
+                  _pickFile('hospitalCertificate');
                 },
               ),
               //6
@@ -148,15 +186,17 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames,
+                fileName: _fileNames['parentAffidavit']!,
                 onPickFile: () {
-                  _pickFile();
+                  _pickFile('parentAffidavit');
                 },
               ),
 
               btn(
                 text: 'सबमिट करा',
-                onPressed: () {},
+                onPressed: () {
+                  _submitFiles();
+                },
                 bg_color: Colors.blue,
                 textcolor: Colors.white,
                 fontSize: 25,
