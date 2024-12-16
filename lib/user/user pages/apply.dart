@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../outter pages/userdrawer.dart';
+import 'applications pages/birth.certificate.dart';
 import 'applications pages/regi_birth.dart';
 
 class Apply extends StatefulWidget {
@@ -45,14 +46,23 @@ class ApplyState extends State<Apply> {
                           )));
             },
           ),
-          const Divider(height: 1,),
+          const Divider(
+            height: 1,
+          ),
           ListTile(
             leading: const Icon(
               Icons.edit_document,
               color: Colors.blueAccent,
             ),
             title: const Text("जन्माचा दाखला"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BirthCertificate(
+                            token: widget.token,
+                          )));
+            },
           ),
           const Divider(height: 1),
           ListTile(

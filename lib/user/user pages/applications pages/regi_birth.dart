@@ -58,7 +58,6 @@ class RegiBirthState extends State<RegiBirth> {
           );
         }
       }
-
       // Send the request
       var response = await request.send();
 
