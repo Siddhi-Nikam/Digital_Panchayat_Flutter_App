@@ -102,7 +102,7 @@ class ApplyState extends State<Apply> {
               Icons.edit_document,
               color: Colors.blueAccent,
             ),
-            title: const Text("सबस्टंशियलचा पुरावा"),
+            title: const Text("निराधार पुरावा"),
             onTap: () {},
           ),
         ],
