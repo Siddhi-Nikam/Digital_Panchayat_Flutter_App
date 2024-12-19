@@ -122,16 +122,13 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
+                    enabled: false,
                     readOnly: true,
+                    initialValue: uname,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
-                      label: Text(
-                        uname,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
+                      labelText: uname,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -154,16 +151,13 @@ class RegiBirthState extends State<RegiBirth> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                  child: TextFormField(
                     readOnly: true,
+                    enabled: false,
+                    initialValue: mob,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
-                      label: Text(
-                        mob,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
+                      labelText: mob,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
