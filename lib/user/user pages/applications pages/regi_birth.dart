@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
 import 'package:http/http.dart' as http;
 
 class RegiBirth extends StatefulWidget {
+  final String token;
   const RegiBirth({
     super.key,
+    required this.token,
   });
 
   @override
@@ -16,6 +19,22 @@ class RegiBirth extends StatefulWidget {
 }
 
 class RegiBirthState extends State<RegiBirth> {
+  late String uname;
+  late String mob;
+  @override
+  void initState() {
+    super.initState();
+
+    // Decode JWT token and extract the necessary fields
+    try {
+      Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
+      uname = jwtdecodetoken['uname'];
+      mob = jwtdecodetoken['mob'];
+    } catch (e) {
+      print('Token format is invalid: $e');
+    }
+  }
+
   final Map<String, dynamic> _fileNames = {
     'applicantId': "No file selected",
     'LC': "No file selected",
@@ -84,120 +103,186 @@ class RegiBirthState extends State<RegiBirth> {
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              //1
-              Padding(padding: EdgeInsets.only(top: 10)),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "अर्जदाराचे ओळखपत्र",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      "अर्जदाराचे नाव",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              FilePickerRow(
-                fileName: _fileNames["applicantId"]!,
-                onPickFile: () {
-                  _pickFile("applicantId");
-                },
-              ),
-              //2
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("शाळा सोडल्याचा दाखला ",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      label: Text(
+                        uname,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              FilePickerRow(
-                fileName: _fileNames['LC']!,
-                onPickFile: () {
-                  _pickFile("LC");
-                },
-              ),
-              //3
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("वडिलांचे ओळखपत्र",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      "अर्जदाराचा मोबाईल नंबर",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              FilePickerRow(
-                fileName: _fileNames["fatherId"]!,
-                onPickFile: () {
-                  _pickFile("fatherId");
-                },
-              ),
-              //4
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("आईचे ओळखपत्र",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      label: Text(
+                        mob,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              FilePickerRow(
-                fileName: _fileNames['motherId']!,
-                onPickFile: () {
-                  _pickFile("motherId");
-                },
-              ),
-              //5
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("जन्म झालेल्या रुग्णालयाचे प्रमाणपत्र",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                //1
+                Padding(padding: EdgeInsets.only(top: 10)),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      "अर्जदाराचे ओळखपत्र",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              FilePickerRow(
-                fileName: _fileNames['hospitalCertificate']!,
-                onPickFile: () {
-                  _pickFile('hospitalCertificate');
-                },
-              ),
-              //6
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("जन्म रुग्णालयात झाला नसल्यास पालकांचे शपथपत्र",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                FilePickerRow(
+                  fileName: _fileNames["applicantId"]!,
+                  onPickFile: () {
+                    _pickFile("applicantId");
+                  },
                 ),
-              ),
-              FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
-                onPickFile: () {
-                  _pickFile('parentAffidavit');
-                },
-              ),
+                //2
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text("शाळा सोडल्याचा दाखला ",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                FilePickerRow(
+                  fileName: _fileNames['LC']!,
+                  onPickFile: () {
+                    _pickFile("LC");
+                  },
+                ),
+                //3
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text("वडिलांचे ओळखपत्र",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                FilePickerRow(
+                  fileName: _fileNames["fatherId"]!,
+                  onPickFile: () {
+                    _pickFile("fatherId");
+                  },
+                ),
+                //4
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text("आईचे ओळखपत्र",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                FilePickerRow(
+                  fileName: _fileNames['motherId']!,
+                  onPickFile: () {
+                    _pickFile("motherId");
+                  },
+                ),
+                //5
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text("जन्म झालेल्या रुग्णालयाचे प्रमाणपत्र",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                FilePickerRow(
+                  fileName: _fileNames['hospitalCertificate']!,
+                  onPickFile: () {
+                    _pickFile('hospitalCertificate');
+                  },
+                ),
+                //6
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text("जन्म रुग्णालयात झाला नसल्यास पालकांचे शपथपत्र",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                FilePickerRow(
+                  fileName: _fileNames['parentAffidavit']!,
+                  onPickFile: () {
+                    _pickFile('parentAffidavit');
+                  },
+                ),
 
-              btn(
-                text: 'सबमिट करा',
-                onPressed: () {
-                  _submitFiles();
-                },
-                bg_color: Colors.blue,
-                textcolor: Colors.white,
-                fontSize: 25,
-              ),
-            ],
+                btn(
+                  text: 'सबमिट करा',
+                  onPressed: () {
+                    _submitFiles();
+                  },
+                  bg_color: Colors.blue,
+                  textcolor: Colors.white,
+                  fontSize: 25,
+                ),
+              ],
+            ),
           ),
         ));
   }

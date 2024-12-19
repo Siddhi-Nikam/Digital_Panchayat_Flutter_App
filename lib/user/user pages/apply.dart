@@ -40,8 +40,10 @@ class ApplyState extends State<Apply> {
             ),
             title: const Text("जन्म नोंदणी"),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegiBirth()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RegiBirth(token: widget.token)));
             },
           ),
           const Divider(
