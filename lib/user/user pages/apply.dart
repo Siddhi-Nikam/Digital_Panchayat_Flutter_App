@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../outter pages/userdrawer.dart';
 import 'applications pages/birth.certificate.dart';
 import 'applications pages/death_regi.dart';
-import 'applications pages/marriage_regi.dart';
+import 'applications pages/marriage.regi.dart';
 import 'applications pages/regi_birth.dart';
 
 class Apply extends StatefulWidget {
@@ -79,7 +79,7 @@ class ApplyState extends State<Apply> {
             title: const Text("विवाह प्रमाणपत्र"),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MarriageRegi()));
+                  MaterialPageRoute(builder: (context) => Marriage_regi()));
             },
           ),
           const Divider(height: 1),

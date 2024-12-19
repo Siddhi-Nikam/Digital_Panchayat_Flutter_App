@@ -93,7 +93,7 @@ class DeathRegiState extends State {
               },
             ),
             CustomAlignedText(
-              text: 'जन्म स्थान संबंधी पुरावा',
+              text: 'मृत्यु नोंद मागणी अर्ज',
             ),
             FilePickerRow(
               fileName: _fileNames["application"]!,
@@ -102,7 +102,7 @@ class DeathRegiState extends State {
               },
             ),
             CustomAlignedText(
-              text: 'पालकांच्या लग्नाचे प्रमाणपत्र',
+              text: 'मृत व्यक्तीचा रहिवासी दाखला',
             ),
             FilePickerRow(
               fileName: _fileNames["recidence"]!,
@@ -111,7 +111,7 @@ class DeathRegiState extends State {
               },
             ),
             CustomAlignedText(
-              text: 'पालकांच्या लग्नाचे प्रमाणपत्र',
+              text: 'साक्षीदारचे आधार कार्ड ',
             ),
             FilePickerRow(
               fileName: _fileNames["witnessId"]!,

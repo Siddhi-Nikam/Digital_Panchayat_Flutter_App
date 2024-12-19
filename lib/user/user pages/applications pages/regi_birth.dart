@@ -112,7 +112,7 @@ class RegiBirthState extends State<RegiBirth> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("शाळा सोडल्याचा दाखला शाळा सोडल्याचा दाखला",
+                  child: Text("शाळा सोडल्याचा दाखला ",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
