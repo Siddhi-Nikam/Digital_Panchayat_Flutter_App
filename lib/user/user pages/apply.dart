@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../outter pages/userdrawer.dart';
 import 'applications pages/birth.certificate.dart';
+import 'applications pages/death_regi.dart';
 import 'applications pages/marriage_regi.dart';
 import 'applications pages/regi_birth.dart';
 
@@ -64,7 +65,10 @@ class ApplyState extends State<Apply> {
               color: Colors.blueAccent,
             ),
             title: const Text("मृत्यू प्रमाणपत्र"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DeathRegi()));
+            },
           ),
           const Divider(height: 1),
           ListTile(
