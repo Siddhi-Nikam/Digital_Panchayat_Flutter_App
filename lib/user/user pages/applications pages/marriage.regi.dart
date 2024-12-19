@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
 
@@ -14,12 +15,21 @@ class Marriage_regi extends StatefulWidget {
 
 class Marriage_regiState extends State {
   final Map<String, dynamic> _fileNames = {
-    'applicantId': "No file selected",
-    'LC': "No file selected",
-    'fatherId': "No file selected",
-    'motherId': "No file selected",
-    'hospitalCertificate': "No file selected",
-    'parentAffidavit': "No file selected",
+    'husbandphoto': "No file selected",
+    'wifephoto': "No file selected",
+    'husbandId': "No file selected",
+    'wifeId': "No file selected",
+    'husbandLC': "No file selected",
+    'wifeLC': "No file selected",
+    'witness1': "No file selected",
+    'witness1ID': "No file selected",
+    'witness2': "No file selected",
+    'witness2ID': "No file selected",
+    'witness3': "No file selected",
+    'witness3ID': "No file selected",
+    'invitation': "No file selected",
+    'weddingphoto': "No file selected",
+    'application': "No file selected",
   };
   FilePickerResult? result; // Make the result nullable
 
@@ -36,6 +46,35 @@ class Marriage_regiState extends State {
       setState(() {
         _fileNames[key] = "No file selected";
       });
+    }
+  }
+
+  Future<void> _submitFiles() async {
+    try {
+      // API endpoint
+      final url = Uri.parse("");
+
+      // Prepare the request
+      var request = http.MultipartRequest('POST', url);
+
+      // Add files to the request
+      for (var entry in _fileNames.entries) {
+        if (entry.value != "No file selected") {
+          request.files.add(
+            await http.MultipartFile.fromPath(entry.key, entry.value),
+          );
+        }
+      }
+      // Send the request
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print("Files uploaded successfully!");
+      } else {
+        print("Failed to upload files. Error: ${response.reasonPhrase}");
+      }
+    } catch (e) {
+      print("Error while submitting files: $e");
     }
   }
 
@@ -70,9 +109,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames["applicantId"]!,
+                fileName: _fileNames["husbandphoto"]!,
                 onPickFile: () {
-                  _pickFile("applicantId");
+                  _pickFile("husbandphoto");
                 },
               ),
               //2
@@ -86,9 +125,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['LC']!,
+                fileName: _fileNames['wifephoto']!,
                 onPickFile: () {
-                  _pickFile("LC");
+                  _pickFile("wifephoto");
                 },
               ),
               //3
@@ -102,9 +141,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames["fatherId"]!,
+                fileName: _fileNames["husbandId"]!,
                 onPickFile: () {
-                  _pickFile("fatherId");
+                  _pickFile("husbandId");
                 },
               ),
               //4
@@ -118,9 +157,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['motherId']!,
+                fileName: _fileNames['wifeId']!,
                 onPickFile: () {
-                  _pickFile("motherId");
+                  _pickFile("wifeId");
                 },
               ),
               //5
@@ -134,9 +173,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['hospitalCertificate']!,
+                fileName: _fileNames['husbandLC']!,
                 onPickFile: () {
-                  _pickFile('hospitalCertificate');
+                  _pickFile('husbandLC');
                 },
               ),
               //6
@@ -150,9 +189,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['wifeLC']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('wifeLC');
                 },
               ),
               Align(
@@ -175,9 +214,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['witness1']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('witness1');
                 },
               ),
               Align(
@@ -190,9 +229,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['witness1ID']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('witness1ID');
                 },
               ),
               Align(
@@ -205,9 +244,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['witness2']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('witness2');
                 },
               ),
               Align(
@@ -220,9 +259,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['witness2ID']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('witness2ID');
                 },
               ),
               Align(
@@ -235,9 +274,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['witness3']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('witness3');
                 },
               ),
               Align(
@@ -250,9 +289,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['witness3ID']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('witness3ID');
                 },
               ),
               Align(
@@ -265,9 +304,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['invitation']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('invitation');
                 },
               ),
               Align(
@@ -280,9 +319,9 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['weddingphoto']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('weddingphoto');
                 },
               ),
               Align(
@@ -295,16 +334,16 @@ class Marriage_regiState extends State {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['parentAffidavit']!,
+                fileName: _fileNames['application']!,
                 onPickFile: () {
-                  _pickFile('parentAffidavit');
+                  _pickFile('application');
                 },
               ),
 
               btn(
                 text: 'सबमिट करा',
                 onPressed: () {
-                  // _submitFiles();
+                  _submitFiles();
                 },
                 bg_color: Colors.blue,
                 textcolor: Colors.white,
