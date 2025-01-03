@@ -19,8 +19,8 @@ class buttonState extends State {
       body: Center(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 200, left: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 200),
               child: Center(
                 child: Text(
                   "ई-ग्राम पंचायत मध्ये आपले स्वागत",
@@ -28,6 +28,7 @@ class buttonState extends State {
                       color: Colors.black,
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
