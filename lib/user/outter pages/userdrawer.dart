@@ -152,12 +152,15 @@ class _AppDrawerState extends State<AppDrawer> {
               );
             },
           ),
+          SizedBox(
+            height: 100,
+          ),
           ListTile(
             tileColor: Colors.blue,
             shape: Border.all(
-                color: Colors.blueGrey.shade800,
+                color: const Color.fromARGB(255, 75, 90, 97),
                 strokeAlign: BorderSide.strokeAlignInside),
-            trailing: const Tooltip(
+            leading: const Tooltip(
                 message: "Logout",
                 child: Icon(Icons.logout, color: Colors.white)),
             title: const Text(
