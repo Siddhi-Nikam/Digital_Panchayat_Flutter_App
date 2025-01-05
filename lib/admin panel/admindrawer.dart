@@ -1,6 +1,6 @@
 import 'package:digitalpanchayat/admin%20panel/admindashboard.dart';
 import 'package:flutter/material.dart';
-import '../comman pages/buttons.dart';
+//import '../comman pages/buttons.dart';
 import 'multiple pages/applications.dart';
 import 'multiple pages/instruction.dart';
 import 'multiple pages/issues.dart';
@@ -22,7 +22,7 @@ class AdminDrawer extends StatelessWidget {
               children: [
                 Center(
                   child: CircleAvatar(
-                    radius: 50,
+                    radius: 40,
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.person,
@@ -34,13 +34,13 @@ class AdminDrawer extends StatelessWidget {
                 const SizedBox(height: 5),
                 const Text(
                   "प्रशासक",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 25),
                 )
               ],
             ),
           ),
           ListTile(
-            title: const Text('डॅशबोर्ड'),
+            title: const Text('डॅशबोर्ड', style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -53,7 +53,7 @@ class AdminDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('अर्ज'),
+            title: const Text('अर्ज', style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -63,7 +63,7 @@ class AdminDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('सूचना'),
+            title: const Text('सूचना', style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -73,7 +73,7 @@ class AdminDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('सेवा'),
+            title: const Text('सेवा', style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -83,7 +83,7 @@ class AdminDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('समस्या'),
+            title: const Text('समस्या', style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -93,7 +93,8 @@ class AdminDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('घर कर आणि पाणी कर'),
+            title:
+                const Text('घर कर आणि पाणी कर', style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -102,14 +103,25 @@ class AdminDrawer extends StatelessWidget {
               );
             },
           ),
+          SizedBox(
+            height: 100,
+          ),
           ListTile(
-            title: const Text('लॉगआउट करा'),
+            tileColor: Colors.blue,
+            shape: Border.all(
+                color: const Color.fromARGB(255, 75, 90, 97),
+                strokeAlign: BorderSide.strokeAlignInside),
+            leading: const Tooltip(
+                message: "Logout",
+                child: Icon(Icons.logout, color: Colors.white)),
+            title: const Text(
+              'लॉगआउट करा',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
             onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const buttons()),
-              );
+              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/adminlogin');
             },
           ),
         ],

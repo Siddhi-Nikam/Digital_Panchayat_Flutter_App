@@ -130,6 +130,10 @@ class _userloginState extends State<userlogin> {
                         labelText: "आधार क्रमांक",
                         hintText: "तुमचा आधार क्रमांक टाका",
                         fillColor: Colors.white,
+                        suffixIcon: const Icon(
+                          Icons.person,
+                          color: Colors.blue,
+                        ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                             borderSide: const BorderSide(

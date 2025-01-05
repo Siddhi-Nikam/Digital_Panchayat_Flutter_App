@@ -113,6 +113,10 @@ class _AdminloginState extends State<Adminlogin> {
                       labelText: "प्रशासक",
                       hintText: "प्रशासक नाव प्रविष्ट करा",
                       fillColor: Colors.white,
+                      suffixIcon: const Icon(
+                        Icons.person,
+                        color: Colors.blue,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(

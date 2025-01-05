@@ -51,8 +51,10 @@ class RegiBirthState extends State<RegiBirth> {
 
     if (result != null && result!.files.isNotEmpty) {
       PlatformFile file = result!.files.first;
+      print("Selected file path: ${file.path}"); // Debugging: Log the file path
+
       setState(() {
-        _fileNames[key] = file.name;
+        _fileNames[key] = file.path ?? "No file selected";
       });
     } else {
       setState(() {
@@ -64,10 +66,13 @@ class RegiBirthState extends State<RegiBirth> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("");
+      final url = Uri.parse("http://10.0.2.2:4000/registerbirth");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
+      // Add form data fields
+      request.fields['uname'] = uname;
+      request.fields['mob'] = mob;
 
       // Add files to the request
       for (var entry in _fileNames.entries) {
@@ -81,9 +86,18 @@ class RegiBirthState extends State<RegiBirth> {
       var response = await request.send();
 
       if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Successfully uploaded files"),
+        ));
+
         print("Files uploaded successfully!");
       } else {
         print("Failed to upload files. Error: ${response.reasonPhrase}");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Something went wrong "),
+        ));
       }
     } catch (e) {
       print("Error while submitting files: $e");

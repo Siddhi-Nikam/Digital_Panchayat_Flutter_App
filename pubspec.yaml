@@ -54,6 +54,9 @@ dependencies:
   path: ^1.9.0
   file_picker: ^8.1.4
   open_file: ^3.5.9
+  iconify_flutter: ^0.0.7
+  font_awesome_flutter: ^10.8.0
+
  
  
     
