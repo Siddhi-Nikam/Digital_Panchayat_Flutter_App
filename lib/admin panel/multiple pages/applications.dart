@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../reusable component/card_component.dart';
 import '../admindrawer.dart';
+import 'applied_applications/birth_certificates.dart';
 
 class applications extends StatefulWidget {
   const applications({super.key});
@@ -15,7 +15,11 @@ class applications extends StatefulWidget {
 
 class applicationsState extends State {
   final List<Map<String, dynamic>> cardData = [
-    {"icon": FontAwesomeIcons.baby, "title": "Profile", "route": ()},
+    {
+      "icon": FontAwesomeIcons.baby,
+      "title": "Profile",
+      "route": BirthCertificate()
+    },
     {"icon": Icons.home, "title": "Home", "route": ()},
     {"icon": Icons.settings, "title": "Settings", "route": ()},
     {"icon": Icons.phone, "title": "Contact Us", "route": ()},
