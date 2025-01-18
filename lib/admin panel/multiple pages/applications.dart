@@ -17,7 +17,7 @@ class applicationsState extends State {
   final List<Map<String, dynamic>> cardData = [
     {
       "icon": FontAwesomeIcons.baby,
-      "title": "Profile",
+      "title": "Birth Certificates",
       "route": BirthCertificate()
     },
     {"icon": Icons.home, "title": "Home", "route": ()},
