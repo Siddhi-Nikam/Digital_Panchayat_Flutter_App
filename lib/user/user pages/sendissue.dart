@@ -115,49 +115,19 @@ class _ServiceState extends State<issue> {
                         fontSize: 20,
                         color: Colors.blue,
                         fontWeight: FontWeight.bold)),
-                TextField(
-                  controller: issue_desp,
-                  decoration: InputDecoration(
-                    label: const Text(
-                      "समस्येचे वर्णन",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    hintText: "समस्येचे वर्णन..",
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.blue)),
-                  child: _image != null
-                      ? Image.file(_image!)
-                      : Center(child: const Text("No image selected.")),
-                ),
-                const SizedBox(height: 20),
                 SizedBox(
-                  width: 200,
-                  child: ElevatedButton(
-                    onPressed: () => _pickImage(ImageSource.gallery),
-                    child: const Text(
-                      "गॅलरीमधून इमेज निवडा",
-                      style: TextStyle(color: Colors.blue),
+                  child: TextField(
+                    controller: issue_desp,
+                    decoration: InputDecoration(
+                      label: const Text(
+                        "समस्येचे वर्णन",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: "समस्येचे वर्णन..",
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  width: 200,
-                  child: ElevatedButton(
-                    onPressed: () => _pickImage(ImageSource.camera),
-                    child: const Text("कॅमेराने फोटो काढा",
-                        style: TextStyle(color: Colors.blue)),
                   ),
                 ),
                 SizedBox(
