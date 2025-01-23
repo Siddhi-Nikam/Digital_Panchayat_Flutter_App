@@ -10,7 +10,7 @@ class BirthCertificate extends StatefulWidget {
 }
 
 class _BirthCertificateState extends State<BirthCertificate> {
-   late Future<List<Map<String, dynamic>>> _futureCertificates;
+  late Future<List<Map<String, dynamic>>> _futureCertificates;
 
   @override
   void initState() {
