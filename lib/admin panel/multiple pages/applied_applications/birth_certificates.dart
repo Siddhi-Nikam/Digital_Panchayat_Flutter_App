@@ -11,7 +11,7 @@ class BirthCertificate extends StatefulWidget {
 
 class _BirthCertificateState extends State<BirthCertificate> {
   late Future<List<Map<String, dynamic>>> _futureCertificates;
-
+  late List<Map<String, dynamic>> data;
   @override
   void initState() {
     super.initState();
@@ -22,9 +22,11 @@ class _BirthCertificateState extends State<BirthCertificate> {
     try {
       final response =
           await http.get(Uri.parse('http://10.0.2.2:4000/birthregister'));
+      print(response.statusCode);
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
+        print(data);
         if (data is Map && data.containsKey('data')) {
           return (data['data'] as List).cast<Map<String, dynamic>>();
         } else {
