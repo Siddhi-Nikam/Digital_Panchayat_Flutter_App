@@ -49,7 +49,7 @@ class _AppDrawerState extends State<AppDrawer> {
             title: const Text('डॅशबोर्ड'),
             onTap: () {
               Navigator.pop(context); // Close the drawer
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => userdashboard(

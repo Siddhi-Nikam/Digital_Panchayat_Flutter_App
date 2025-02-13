@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../outter pages/userdrawer.dart';
+import 'applications pages/8A utara.dart';
 import 'applications pages/birth.certificate.dart';
 import 'applications pages/death_regi.dart';
 import 'applications pages/marriage.regi.dart';
+import 'applications pages/niradhar.dart';
 import 'applications pages/regi_birth.dart';
 
 class Apply extends StatefulWidget {
@@ -100,7 +102,12 @@ class ApplyState extends State<Apply> {
               color: Colors.blueAccent,
             ),
             title: const Text("8A उतारा"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => utaraPage(token: widget.token)));
+            },
           ),
           const Divider(height: 1),
           ListTile(
@@ -109,7 +116,12 @@ class ApplyState extends State<Apply> {
               color: Colors.blueAccent,
             ),
             title: const Text("निराधार पुरावा"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Niradhar(token: widget.token)));
+            },
           ),
         ],
       ),
