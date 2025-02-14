@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
@@ -15,6 +16,19 @@ class _utaraPageState extends State<utaraPage> {
   late String uname;
   late String mob;
   @override
+  void initState() {
+    super.initState();
+
+    // Decode JWT token and extract the necessary fields
+    try {
+      Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
+      uname = jwtdecodetoken['uname'];
+      mob = jwtdecodetoken['mob'];
+    } catch (e) {
+      print('Token format is invalid: $e');
+    }
+  }
+
   final Map<String, dynamic> _fileNames = {
     '7/12': "No file selected",
     'purchase letter': "No file selected",
