@@ -39,7 +39,7 @@ class instructionsState extends State<instructions> {
       };
 
       var response = await http.post(
-        Uri.parse(add_instruction),
+        Uri.parse("$BaseUrl/instructions"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regbody),
       );

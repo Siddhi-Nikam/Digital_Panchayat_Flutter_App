@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:digitalpanchayat/config.dart';
 import 'package:flutter/material.dart';
 //import 'package:digitalpanchayat/config.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -59,7 +60,7 @@ class _userloginState extends State<userlogin> {
       //print(regbody);
       try {
         var response = await http.post(
-          Uri.parse("http://10.0.2.2:4000/login"),
+          Uri.parse('$BaseUrl/login'),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(regbody),
         );

@@ -1,3 +1,4 @@
+import 'package:digitalpanchayat/config.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -66,7 +67,7 @@ class RegiBirthState extends State<RegiBirth> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("http://10.0.2.2:4000/registerbirth");
+      final url = Uri.parse("$BaseUrl/registerbirth");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);

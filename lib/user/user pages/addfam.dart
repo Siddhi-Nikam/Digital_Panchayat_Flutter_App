@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:http/http.dart' as http;
+import '../../config.dart';
 import '../outter pages/userdrawer.dart';
 import 'addedfam.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
@@ -95,7 +96,7 @@ class addfamState extends State<addfam> {
         };
 
         var response = await http.post(
-          Uri.parse("http://10.0.2.2:4000/addfamily"),
+          Uri.parse("$BaseUrl/addfamily"),
           headers: {
             "Content-Type": "application/json",
           },

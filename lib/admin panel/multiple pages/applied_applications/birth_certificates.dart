@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../../config.dart';
+
 class BirthCertificate extends StatefulWidget {
   const BirthCertificate({super.key});
 
@@ -20,8 +22,7 @@ class _BirthCertificateState extends State<BirthCertificate> {
 
   Future<List<Map<String, dynamic>>> fetchBirthCertificates() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://10.0.2.2:4000/birthregister'));
+      final response = await http.get(Uri.parse('$BaseUrl/birthregister'));
       print(response.statusCode);
 
       if (response.statusCode == 200) {

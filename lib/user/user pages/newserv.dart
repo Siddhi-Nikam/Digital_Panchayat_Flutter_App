@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:digitalpanchayat/config.dart';
 import 'package:digitalpanchayat/user/outter%20pages/userdrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -18,8 +19,7 @@ class _ServiceState extends State<Service> {
 
   Future<List<Map<String, dynamic>>> fetchData() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://10.0.2.2:4000/fetchService'));
+      final response = await http.get(Uri.parse('$BaseUrl/fetchService'));
 
       if (response.statusCode == 200) {
         print(response.statusCode);

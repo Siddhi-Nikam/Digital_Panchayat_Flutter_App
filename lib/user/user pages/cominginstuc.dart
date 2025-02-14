@@ -1,3 +1,4 @@
+import 'package:digitalpanchayat/config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +21,7 @@ class UserInstructState extends State<UserInstruct> {
 
   Future<List<Map<String, dynamic>>> fetchData() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://10.0.2.2:4000/getInstruction'));
+      final response = await http.get(Uri.parse('$BaseUrl/getInstruction'));
 
       if (response.statusCode == 200) {
         print(response.statusCode);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:digitalpanchayat/config.dart';
 import 'package:digitalpanchayat/user/outter%20pages/userdrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -52,7 +53,7 @@ class _ServiceState extends State<issue> {
         "image": _image.toString()
       };
       var response = await http.post(
-        Uri.parse('http://10.0.2.2:4000/createIssue'),
+        Uri.parse('$BaseUrl/createIssue'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regbody),
       );

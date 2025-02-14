@@ -1,3 +1,4 @@
+import 'package:digitalpanchayat/config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -20,8 +21,7 @@ class issuesState extends State {
 
   Future<List<Map<String, dynamic>>> fetchIssues() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://10.0.2.2:4000/fetchIssue'));
+      final response = await http.get(Uri.parse('$BaseUrl/fetchIssue'));
 
       if (response.statusCode == 200) {
         print(response.statusCode);

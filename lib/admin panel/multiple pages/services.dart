@@ -38,7 +38,7 @@ class serviceState extends State<services> {
       };
 
       var response = await http.post(
-        Uri.parse(add_service),
+        Uri.parse("$BaseUrl/createService"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regbody),
       );

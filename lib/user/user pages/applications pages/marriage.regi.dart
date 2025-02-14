@@ -1,3 +1,4 @@
+import 'package:digitalpanchayat/config.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -52,7 +53,7 @@ class Marriage_regiState extends State {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("");
+      final url = Uri.parse("$BaseUrl/");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);

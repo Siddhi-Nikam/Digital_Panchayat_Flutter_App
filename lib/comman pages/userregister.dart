@@ -62,7 +62,7 @@ class _UserregisterState extends State<Userregister> {
   Future<void> checkAadhaar(String adhar) async {
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:4000/checkAadhar/$adhar'),
+        Uri.parse('$BaseUrl/checkAadhar/$adhar'),
       );
 
       if (response.statusCode == 400) {
@@ -261,7 +261,6 @@ class _UserregisterState extends State<Userregister> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextFormField(
@@ -352,7 +351,6 @@ class _UserregisterState extends State<Userregister> {
                               ? Icons.visibility_off
                               : Icons.visibility,
                           color: Colors.blue,
-
                         ),
                       ),
                       fillColor: Colors.white,
@@ -370,7 +368,7 @@ class _UserregisterState extends State<Userregister> {
                     controller: _date,
                     decoration: InputDecoration(
                       suffixIcon:
-                      const Icon(Icons.calendar_month, color: Colors.blue),
+                          const Icon(Icons.calendar_month, color: Colors.blue),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -382,7 +380,6 @@ class _UserregisterState extends State<Userregister> {
                     onTap: () => _selectDate(context),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(

@@ -59,7 +59,7 @@ class _AdminloginState extends State<Adminlogin> {
 
       try {
         var response = await http.post(
-          Uri.parse(adminlogin_url),
+          Uri.parse('$BaseUrl/adminlogin'),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(regbody),
         );
