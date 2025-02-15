@@ -13,7 +13,7 @@ class BirthCertificate extends StatefulWidget {
 
 class _BirthCertificateState extends State<BirthCertificate> {
   late Future<List<Map<String, dynamic>>> _futureCertificates;
-  late List<Map<String, dynamic>> data;
+
   @override
   void initState() {
     super.initState();
@@ -23,15 +23,21 @@ class _BirthCertificateState extends State<BirthCertificate> {
   Future<List<Map<String, dynamic>>> fetchBirthCertificates() async {
     try {
       final response = await http.get(Uri.parse('$BaseUrl/birthregister'));
-      print(response.statusCode);
+      //print('Response Code: ${response.statusCode}');
+      //print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        print(data);
-        if (data is Map && data.containsKey('data')) {
-          return (data['data'] as List).cast<Map<String, dynamic>>();
+        var decodedData = jsonDecode(response.body);
+        print('Decoded Data: $decodedData');
+
+        if (decodedData is List) {
+          return decodedData
+              .cast<Map<String, dynamic>>(); // If API directly returns a list
+        } else if (decodedData is Map && decodedData.containsKey('data')) {
+          return (decodedData['data'] as List).cast<Map<String, dynamic>>();
         } else {
-          throw Exception("Unexpected response format");
+          throw Exception(
+              "Unexpected response format: $decodedData"); // Print actual response
         }
       } else {
         throw Exception('Failed to load data');
@@ -79,7 +85,7 @@ class _BirthCertificateState extends State<BirthCertificate> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const Icon(
-                      Icons.integration_instructions,
+                      Icons.edit_document,
                       color: Colors.blue,
                     ),
                     title: Text(
