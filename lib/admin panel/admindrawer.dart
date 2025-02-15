@@ -1,6 +1,7 @@
 import 'package:digitalpanchayat/admin%20panel/admindashboard.dart';
 import 'package:flutter/material.dart';
 //import '../comman pages/buttons.dart';
+import '../comman pages/buttons.dart';
 import 'multiple pages/applications.dart';
 import 'multiple pages/instruction.dart';
 import 'multiple pages/issues.dart';
@@ -121,7 +122,10 @@ class AdminDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/adminlogin');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const buttons()),
+              );
             },
           ),
         ],
