@@ -3,3 +3,8 @@
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningActivityStarter$Error
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningActivityStarter
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningEphemeralKeyProvider
+-keep class proguard.annotation.Keep { *; }
+-keep class proguard.annotation.KeepClassMembers { *; }
+-keep class com.razorpay.** { *; }
+-keep class org.apache.commons.** { *; }
+-dontwarn proguard.annotation.**
