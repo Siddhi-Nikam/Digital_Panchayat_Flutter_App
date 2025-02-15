@@ -89,7 +89,7 @@ class RegiBirthState extends State<RegiBirth> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
-          content: Text("Successfully uploaded files"),
+          content: Text("Request submitted successfully"),
         ));
 
         print("Files uploaded successfully!");
@@ -97,11 +97,11 @@ class RegiBirthState extends State<RegiBirth> {
         print("Failed to upload files. Error: ${response.reasonPhrase}");
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
-          content: Text("Something went wrong "),
+          content: Text("Error while submitting"),
         ));
       }
     } catch (e) {
-      print("Error while submitting files: $e");
+      print("Error while submitting : $e");
     }
   }
 
