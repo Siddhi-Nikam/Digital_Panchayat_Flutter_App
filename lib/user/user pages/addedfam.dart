@@ -84,41 +84,19 @@ class _FamListState extends State<FamList> {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                    leading: const Icon(
-                      Icons.person,
-                      color: Colors.blue,
-                      size: 50,
-                    ),
-                    title: Text(
-                      data[index]['name'],
-                      style: const TextStyle(
-                          color: Colors.blue, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                        'Adhar: ${data[index]["adhar"]} \n Gender: ${data[index]["gender"]} \n Date of birth: ${data[index]["DOB"]}'),
-                    trailing: const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.blue,
-                    ),
-                    onTap: () {
-                      // showDialog(
-                      //     context: context,
-                      //     barrierDismissible: false,
-                      //     builder: (context) => AlertDialog(
-                      //           title: Text(
-                      //             data[index]['title'],
-                      //             style: const TextStyle(
-                      //                 color: Colors.blue,
-                      //                 fontWeight: FontWeight.bold),
-                      //           ),
-                      //           content: Text(data[index]['descp']),
-                      //           actions: [
-                      //             TextButton(
-                      //                 onPressed: () => Navigator.pop(context),
-                      //                 child: const Text("Close"))
-                      //           ],
-                      //         ));
-                    });
+                  leading: const Icon(
+                    Icons.person,
+                    color: Colors.blue,
+                    size: 50,
+                  ),
+                  title: Text(
+                    data[index]['name'],
+                    style: const TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                      'Adhar: ${data[index]["adhar"]} \n Gender: ${data[index]["gender"]} \n Date of birth: ${data[index]["DOB"]}'),
+                );
               },
               separatorBuilder: (context, index) => const Divider(
                 color: Colors.grey, // Customize the divider color

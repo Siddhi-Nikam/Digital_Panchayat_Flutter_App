@@ -1,4 +1,4 @@
-const BaseUrl = "http://10.0.2.2:4000";
+const BaseUrl = "http://192.168.89.127:4000";
 
 const registration_url = 'http://10.0.2.2:4000/registration';
 const login_url = "http://10.0.2.2:4000/login";

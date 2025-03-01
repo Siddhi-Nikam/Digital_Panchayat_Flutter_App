@@ -134,7 +134,7 @@ class _NiradharState extends State<Niradhar> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    "अर्जदाराचे ओळखपत्र",
+                    "निराधार नोंदणी अर्ज",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -153,7 +153,7 @@ class _NiradharState extends State<Niradhar> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("शाळा सोडल्याचा दाखला ",
+                  child: Text("कुटुंब प्रमुख मृत्यू प्रमाणपत्र",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
@@ -169,7 +169,7 @@ class _NiradharState extends State<Niradhar> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("वडिलांचे ओळखपत्र",
+                  child: Text("आधार कार्ड",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
@@ -185,7 +185,7 @@ class _NiradharState extends State<Niradhar> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("आईचे ओळखपत्र",
+                  child: Text("राशन कार्ड",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),

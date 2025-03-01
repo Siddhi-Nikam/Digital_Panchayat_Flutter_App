@@ -1,13 +1,20 @@
-import 'package:digitalpanchayat/config.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:digitalpanchayat/config.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file.text.dart';
 import '../../../reusable component/file_picking.dart';
 
 class DeathRegi extends StatefulWidget {
-  const DeathRegi({super.key});
+  final String token;
+  const DeathRegi({
+    Key? key,
+    required this.token,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +22,23 @@ class DeathRegi extends StatefulWidget {
   }
 }
 
-class DeathRegiState extends State {
+class DeathRegiState extends State<DeathRegi> {
+  late String uname;
+  late String mob;
+  @override
+  void initState() {
+    super.initState();
+
+    // Decode JWT token and extract the necessary fields
+    try {
+      Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
+      uname = jwtdecodetoken['uname'];
+      mob = jwtdecodetoken['mob'];
+    } catch (e) {
+      print('Token format is invalid: $e');
+    }
+  }
+
   final Map<String, dynamic> _fileNames = {
     'personId': "No file selected",
     'application': "No file selected",
@@ -83,6 +106,63 @@ class DeathRegiState extends State {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "अर्जदाराचे नाव",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                enabled: false,
+                readOnly: true,
+                initialValue: uname,
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  labelText: uname,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "अर्जदाराचा मोबाईल नंबर",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                readOnly: true,
+                enabled: false,
+                initialValue: mob,
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  labelText: mob,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+            ),
             Padding(padding: EdgeInsets.all(10)),
             CustomAlignedText(
               text: 'मृत व्यक्तीचे आधार कार्ड',

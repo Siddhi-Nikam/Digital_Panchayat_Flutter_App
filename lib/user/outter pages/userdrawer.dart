@@ -108,7 +108,9 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Tax(token: widget.token)),
+                    builder: (context) => PaymentPage(
+                          token: widget.token,
+                        )),
               );
             },
           ),

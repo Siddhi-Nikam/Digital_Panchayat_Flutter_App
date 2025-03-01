@@ -58,8 +58,11 @@ class ApplyState extends State<Apply> {
             ),
             title: const Text("जन्माचा दाखला"),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BirthCertificate()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          BirthCertificate(token: widget.token)));
             },
           ),
           const Divider(height: 1),
@@ -70,8 +73,12 @@ class ApplyState extends State<Apply> {
             ),
             title: const Text("मृत्यू प्रमाणपत्र"),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DeathRegi()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DeathRegi(
+                            token: widget.token,
+                          )));
             },
           ),
           const Divider(height: 1),
@@ -82,18 +89,13 @@ class ApplyState extends State<Apply> {
             ),
             title: const Text("विवाह प्रमाणपत्र"),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Marriage_regi()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Marriage_regi(
+                            token: widget.token,
+                          )));
             },
-          ),
-          const Divider(height: 1),
-          ListTile(
-            leading: const Icon(
-              Icons.edit_document,
-              color: Colors.blueAccent,
-            ),
-            title: const Text("दारिद्र्यरेषेखालील असल्याचा पुरावा"),
-            onTap: () {},
           ),
           const Divider(height: 1),
           ListTile(
@@ -115,7 +117,7 @@ class ApplyState extends State<Apply> {
               Icons.edit_document,
               color: Colors.blueAccent,
             ),
-            title: const Text("निराधार पुरावा"),
+            title: const Text("निराधार दाखला"),
             onTap: () {
               Navigator.push(
                   context,
