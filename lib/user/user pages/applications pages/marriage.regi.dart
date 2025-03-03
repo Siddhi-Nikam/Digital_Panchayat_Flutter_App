@@ -10,10 +10,10 @@ import '../../../reusable component/file_picking.dart';
 
 class Marriage_regi extends StatefulWidget {
   final String token;
-  Marriage_regi({
-    Key? key,
+  const Marriage_regi({
+    super.key,
     required this.token,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() {

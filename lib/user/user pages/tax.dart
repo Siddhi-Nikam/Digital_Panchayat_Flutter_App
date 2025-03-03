@@ -17,7 +17,7 @@ class _PaymentPageState extends State<PaymentPage> {
   late String uname;
   late String mob;
   late Razorpay _razorpay;
-  TextEditingController _amountController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
 
   @override
   void initState() {

@@ -12,9 +12,9 @@ import '../../../reusable component/file_picking.dart';
 class DeathRegi extends StatefulWidget {
   final String token;
   const DeathRegi({
-    Key? key,
+    super.key,
     required this.token,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() {

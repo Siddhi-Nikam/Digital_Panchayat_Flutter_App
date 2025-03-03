@@ -57,6 +57,8 @@ dependencies:
   iconify_flutter: ^0.0.7
   font_awesome_flutter: ^10.8.0
   webview_flutter: ^4.4.2  
+  carousel_slider: ^5.0.0
+  smooth_page_indicator: ^1.2.1
 
  
  

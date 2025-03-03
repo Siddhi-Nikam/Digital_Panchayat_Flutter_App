@@ -12,9 +12,9 @@ import '../../../reusable component/file_picking.dart';
 class BirthCertificate extends StatefulWidget {
   final String token;
   const BirthCertificate({
-    Key? key,
+    super.key,
     required this.token,
-  }) : super(key: key);
+  });
 
   @override
   State<BirthCertificate> createState() {
