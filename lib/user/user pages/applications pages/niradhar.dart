@@ -1,7 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../config.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
 
@@ -15,7 +16,7 @@ class Niradhar extends StatefulWidget {
 class _NiradharState extends State<Niradhar> {
   late String uname;
   late String mob;
-
+  late String adhar;
   @override
   void initState() {
     super.initState();
@@ -25,6 +26,7 @@ class _NiradharState extends State<Niradhar> {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
+      adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
     }
@@ -32,9 +34,9 @@ class _NiradharState extends State<Niradhar> {
 
   final Map<String, dynamic> _fileNames = {
     'application': "No file selected",
-    'family head death certificate': "No file selected",
-    'adhar card': "No file selected",
-    'ration card': "No file selected",
+    'familyheaddeathcertificate': "No file selected",
+    'adharcard': "No file selected",
+    'rationcard': "No file selected",
   };
   FilePickerResult? result; // Make the result nullable
 
@@ -56,11 +58,52 @@ class _NiradharState extends State<Niradhar> {
     }
   }
 
+  Future<void> _submitFiles() async {
+    try {
+      // API endpoint
+      final url = Uri.parse("$BaseUrl/");
+
+      // Prepare the request
+      var request = http.MultipartRequest('POST', url);
+
+      request.fields['uname'] = uname;
+      request.fields['mob'] = mob;
+      request.fields["addedBy"] = adhar;
+
+      // Add files to the request
+      for (var entry in _fileNames.entries) {
+        if (entry.value != "No file selected") {
+          request.files.add(
+            await http.MultipartFile.fromPath(entry.key, entry.value),
+          );
+        }
+      }
+      // Send the request
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Request submitted successfully"),
+        ));
+        print("Files uploaded successfully!");
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Request Failed"),
+        ));
+        print("Failed to upload files. Error: ${response.reasonPhrase}");
+      }
+    } catch (e) {
+      print("Error while submitting files: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('8A उतारा', style: TextStyle(color: Colors.white)),
+        title: Text('निराधार नोंदणी', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         iconTheme: IconThemeData(color: Colors.white),
       ),
@@ -143,7 +186,7 @@ class _NiradharState extends State<Niradhar> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames["application"]!,
+                fileName: _fileNames["application"],
                 onPickFile: () {
                   _pickFile("application");
                 },
@@ -159,9 +202,9 @@ class _NiradharState extends State<Niradhar> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['family head death certificate']!,
+                fileName: _fileNames['familyheaddeathcertificate'],
                 onPickFile: () {
-                  _pickFile("family head death certificate");
+                  _pickFile("familyheaddeathcertificate");
                 },
               ),
               //3
@@ -175,9 +218,9 @@ class _NiradharState extends State<Niradhar> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames["adhar card"]!,
+                fileName: _fileNames["adharcard"],
                 onPickFile: () {
-                  _pickFile("adhar card");
+                  _pickFile("adharcard");
                 },
               ),
               //4
@@ -191,16 +234,17 @@ class _NiradharState extends State<Niradhar> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['ration card']!,
+                fileName: _fileNames['rationcard'],
                 onPickFile: () {
-                  _pickFile("ration card");
+                  _pickFile("rationcard");
                 },
               ),
 
               btn(
                 text: 'सबमिट करा',
                 onPressed: () {
-                  // _submitFiles();
+                  _submitFiles();
+                  _fileNames.clear();
                 },
                 bg_color: Colors.blue,
                 textcolor: Colors.white,

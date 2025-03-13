@@ -1,4 +1,4 @@
-const BaseUrl = "http://192.168.89.127:4000";
+const BaseUrl = "http://10.0.3.97:4000";
 
 const registration_url = 'http://10.0.2.2:4000/registration';
 const login_url = "http://10.0.2.2:4000/login";
@@ -11,3 +11,4 @@ const send_issue = "http://10.0.2.2:4000/createIssue";
 const get_issue = "http://10.0.2.2:4000/fetchIssue";
 const addfamily = "http://10.0.2.2:4000/addfamily";
 const getfamily = "http://10.0.2.2:4000/getfamily";
+const sentbirthCertificate = "http://10.0.3.97:4000/postbirthcertificate";

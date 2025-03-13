@@ -64,7 +64,7 @@ class Marriage_regiState extends State<Marriage_regi> {
     if (result != null && result!.files.isNotEmpty) {
       PlatformFile file = result!.files.first;
       setState(() {
-        _fileNames[key] = file.name;
+        _fileNames[key] = file.path;
       });
     } else {
       setState(() {
@@ -76,7 +76,7 @@ class Marriage_regiState extends State<Marriage_regi> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("$BaseUrl/");
+      final url = Uri.parse("$BaseUrl/marriagecertificate");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);

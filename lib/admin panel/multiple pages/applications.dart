@@ -17,10 +17,14 @@ class applicationsState extends State {
   final List<Map<String, dynamic>> cardData = [
     {
       "icon": FontAwesomeIcons.baby,
-      "title": "Birth Certificates",
+      "title": "Birth Registrations",
       "route": BirthCertificate()
     },
-    {"icon": Icons.home, "title": "Home", "route": ()},
+    {
+      "icon": Icons.app_registration,
+      "title": "Birth Certificate Request",
+      "route": ()
+    },
     {"icon": Icons.settings, "title": "Settings", "route": ()},
     {"icon": Icons.phone, "title": "Contact Us", "route": ()},
   ];

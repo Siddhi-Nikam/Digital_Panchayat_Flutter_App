@@ -25,6 +25,7 @@ class DeathRegi extends StatefulWidget {
 class DeathRegiState extends State<DeathRegi> {
   late String uname;
   late String mob;
+  late String adhar;
   @override
   void initState() {
     super.initState();
@@ -34,6 +35,7 @@ class DeathRegiState extends State<DeathRegi> {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
+      adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
     }
@@ -54,7 +56,7 @@ class DeathRegiState extends State<DeathRegi> {
     if (result != null && result!.files.isNotEmpty) {
       PlatformFile file = result!.files.first;
       setState(() {
-        _fileNames[key] = file.name;
+        _fileNames[key] = file.path;
       });
     } else {
       setState(() {
@@ -66,10 +68,14 @@ class DeathRegiState extends State<DeathRegi> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("$BaseUrl/");
+      final url = Uri.parse("$BaseUrl/deathCertificate");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
+
+      request.fields['uname'] = uname;
+      request.fields['mob'] = mob;
+      request.fields["addedBy"] = adhar;
 
       // Add files to the request
       for (var entry in _fileNames.entries) {
@@ -83,8 +89,16 @@ class DeathRegiState extends State<DeathRegi> {
       var response = await request.send();
 
       if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Request submitted successfully"),
+        ));
         print("Files uploaded successfully!");
       } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Request Failed"),
+        ));
         print("Failed to upload files. Error: ${response.reasonPhrase}");
       }
     } catch (e) {
@@ -204,6 +218,7 @@ class DeathRegiState extends State<DeathRegi> {
               text: 'सबमिट करा',
               onPressed: () {
                 _submitFiles();
+                _fileNames.clear();
               },
               bg_color: Colors.blue,
               textcolor: Colors.white,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'uploadedfiles.dart';
 import '../../../config.dart';
 
 class BirthCertificate extends StatefulWidget {
@@ -102,6 +102,18 @@ class _BirthCertificateState extends State<BirthCertificate> {
                       Icons.arrow_forward,
                       color: Colors.blue,
                     ),
+                    onTap: () {
+                      // Navigate to the details page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ViewUploadedFiles(
+                            uname: '',
+                            mob: '',
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
                 separatorBuilder: (context, index) => const Divider(

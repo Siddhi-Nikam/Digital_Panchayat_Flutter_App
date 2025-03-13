@@ -1,7 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../config.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
 
@@ -15,6 +16,7 @@ class utaraPage extends StatefulWidget {
 class _utaraPageState extends State<utaraPage> {
   late String uname;
   late String mob;
+  late String adhar;
   @override
   void initState() {
     super.initState();
@@ -24,16 +26,17 @@ class _utaraPageState extends State<utaraPage> {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
+      adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
     }
   }
 
   final Map<String, dynamic> _fileNames = {
-    '7/12': "No file selected",
-    'purchase letter': "No file selected",
-    'stamp paper': "No file selected",
-    'permission letter': "No file selected",
+    'seventwelve': "No file selected",
+    'purchaseletter': "No file selected",
+    'stamppaper': "No file selected",
+    'permissionletter': "No file selected",
   };
   FilePickerResult? result; // Make the result nullable
 
@@ -52,6 +55,45 @@ class _utaraPageState extends State<utaraPage> {
       setState(() {
         _fileNames[key] = "No file selected";
       });
+    }
+  }
+
+  Future<void> _submitFiles() async {
+    try {
+      // API endpoint
+      final url = Uri.parse("$BaseUrl/eightA");
+
+      // Prepare the request
+      var request = http.MultipartRequest('POST', url);
+      request.fields['uname'] = uname;
+      request.fields['mob'] = mob;
+      request.fields['addedBy'] = adhar;
+      // Add files to the request
+      for (var entry in _fileNames.entries) {
+        if (entry.value != "No file selected") {
+          request.files.add(
+            await http.MultipartFile.fromPath(entry.key, entry.value),
+          );
+        }
+      }
+      // Send the request
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print("Files uploaded successfully!");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Request submitted successfully"),
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Error while submitting"),
+        ));
+        print("Failed to upload files. Error: ${response.reasonPhrase}");
+      }
+    } catch (e) {
+      print("Error while submitting files: $e");
     }
   }
 
@@ -142,9 +184,9 @@ class _utaraPageState extends State<utaraPage> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames["7/12"]!,
+                fileName: _fileNames["seventwelve"],
                 onPickFile: () {
-                  _pickFile("7/12");
+                  _pickFile("seventwelve");
                 },
               ),
               //2
@@ -158,9 +200,9 @@ class _utaraPageState extends State<utaraPage> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['purchase letter']!,
+                fileName: _fileNames['purchaseletter'],
                 onPickFile: () {
-                  _pickFile("purchase letter");
+                  _pickFile("purchaseletter");
                 },
               ),
               //3
@@ -174,9 +216,9 @@ class _utaraPageState extends State<utaraPage> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames["stamp paper"]!,
+                fileName: _fileNames["stamppaper"],
                 onPickFile: () {
-                  _pickFile("stamp paper");
+                  _pickFile("stamppaper");
                 },
               ),
               //4
@@ -190,16 +232,16 @@ class _utaraPageState extends State<utaraPage> {
                 ),
               ),
               FilePickerRow(
-                fileName: _fileNames['permission letter']!,
+                fileName: _fileNames['permissionletter'],
                 onPickFile: () {
-                  _pickFile("permission letter");
+                  _pickFile("permissionletter");
                 },
               ),
 
               btn(
                 text: 'सबमिट करा',
                 onPressed: () {
-                  // _submitFiles();
+                  _submitFiles();
                 },
                 bg_color: Colors.blue,
                 textcolor: Colors.white,

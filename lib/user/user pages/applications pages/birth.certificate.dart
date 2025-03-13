@@ -25,6 +25,7 @@ class BirthCertificate extends StatefulWidget {
 class BirthCertificateState extends State<BirthCertificate> {
   late String uname;
   late String mob;
+  late String adhar;
   @override
   void initState() {
     super.initState();
@@ -34,6 +35,7 @@ class BirthCertificateState extends State<BirthCertificate> {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
+      adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
     }
@@ -55,8 +57,9 @@ class BirthCertificateState extends State<BirthCertificate> {
     if (result != null && result!.files.isNotEmpty) {
       PlatformFile file = result!.files.first;
       setState(() {
-        _fileNames[key] = file.name;
+        _fileNames[key] = file.path;
       });
+      print(_fileNames[key]);
     } else {
       setState(() {
         _fileNames[key] = "No file selected";
@@ -67,12 +70,13 @@ class BirthCertificateState extends State<BirthCertificate> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("$BaseUrl/");
+      final url = Uri.parse("$BaseUrl/postbirthcertificate");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
+      request.fields['addedBy'] = adhar;
       // Add files to the request
       for (var entry in _fileNames.entries) {
         if (entry.value != "No file selected") {
@@ -86,7 +90,15 @@ class BirthCertificateState extends State<BirthCertificate> {
 
       if (response.statusCode == 200) {
         print("Files uploaded successfully!");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Request submitted successfully"),
+        ));
       } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.blue,
+          content: Text("Error while submitting"),
+        ));
         print("Failed to upload files. Error: ${response.reasonPhrase}");
       }
     } catch (e) {
@@ -170,7 +182,7 @@ class BirthCertificateState extends State<BirthCertificate> {
               text: 'वडिलांचे ओळखपत्र',
             ),
             FilePickerRow(
-              fileName: _fileNames["fatherId"]!,
+              fileName: _fileNames["fatherId"],
               onPickFile: () {
                 _pickFile("fatherId");
               },
@@ -179,7 +191,7 @@ class BirthCertificateState extends State<BirthCertificate> {
               text: 'आईचे ओळखपत्र',
             ),
             FilePickerRow(
-              fileName: _fileNames["motherId"]!,
+              fileName: _fileNames["motherId"],
               onPickFile: () {
                 _pickFile("motherId");
               },
@@ -188,7 +200,7 @@ class BirthCertificateState extends State<BirthCertificate> {
               text: 'जन्म स्थान संबंधी पुरावा',
             ),
             FilePickerRow(
-              fileName: _fileNames["evidance"]!,
+              fileName: _fileNames["evidance"],
               onPickFile: () {
                 _pickFile("evidance");
               },
@@ -197,7 +209,7 @@ class BirthCertificateState extends State<BirthCertificate> {
               text: 'पालकांच्या लग्नाचे प्रमाणपत्र',
             ),
             FilePickerRow(
-              fileName: _fileNames["marriageCertificate"]!,
+              fileName: _fileNames["marriageCertificate"],
               onPickFile: () {
                 _pickFile("marriageCertificate");
               },
@@ -206,6 +218,7 @@ class BirthCertificateState extends State<BirthCertificate> {
               text: 'सबमिट करा',
               onPressed: () {
                 _submitFiles();
+                _fileNames.clear();
               },
               bg_color: Colors.blue,
               textcolor: Colors.white,

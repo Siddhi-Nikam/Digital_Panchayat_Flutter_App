@@ -22,6 +22,7 @@ class RegiBirth extends StatefulWidget {
 class RegiBirthState extends State<RegiBirth> {
   late String uname;
   late String mob;
+  late String adhar;
   @override
   void initState() {
     super.initState();
@@ -31,6 +32,7 @@ class RegiBirthState extends State<RegiBirth> {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
+      adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
     }
@@ -74,6 +76,7 @@ class RegiBirthState extends State<RegiBirth> {
       // Add form data fields
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
+      request.fields["addedBy"] = adhar;
 
       // Add files to the request
       for (var entry in _fileNames.entries) {
@@ -101,6 +104,10 @@ class RegiBirthState extends State<RegiBirth> {
         ));
       }
     } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: Colors.blue,
+        content: Text("Error while submitting"),
+      ));
       print("Error while submitting : $e");
     }
   }
@@ -285,6 +292,7 @@ class RegiBirthState extends State<RegiBirth> {
                   text: 'सबमिट करा',
                   onPressed: () {
                     _submitFiles();
+                    _fileNames.clear();
                   },
                   bg_color: Colors.blue,
                   textcolor: Colors.white,
