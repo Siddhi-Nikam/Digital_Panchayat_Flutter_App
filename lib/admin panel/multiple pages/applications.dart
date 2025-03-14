@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../reusable component/card_component.dart';
 import '../admindrawer.dart';
 import 'applied_applications/birth_certificates.dart';
