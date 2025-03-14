@@ -17,10 +17,10 @@ class applicationsState extends State {
   final List<Map<String, dynamic>> cardData = [
     {"title": "जन्म नोंदणी", "route": BirthCertificate()},
     {"title": "जन्माचा दाखला", "route": BirthCertificaterequest()},
-    {"title": "मृत्यू प्रमाणपत्र", "route": ()},
-    {"title": "विवाह प्रमाणपत्र", "route": ()},
-    {"title": "8A उतारा", "route": ()},
-    {"title": "निराधार दाखला", "route": ()},
+    // {"title": "मृत्यू प्रमाणपत्र", "route": ()},
+    // {"title": "विवाह प्रमाणपत्र", "route": ()},
+    //{"title": "8A उतारा", "route": ()},
+    // {"title": "निराधार दाखला", "route": ()},
   ];
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,6 @@ class applicationsState extends State {
           itemBuilder: (context, index) {
             final data = cardData[index];
             return CustomCard(
-              icon: data["icon"],
               title: data["title"],
               onTap: () {
                 Navigator.push(

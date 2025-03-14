@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-  final IconData icon;
   final String title;
   final VoidCallback? onTap;
 
   const CustomCard({
     super.key,
-    required this.icon,
     required this.title,
     this.onTap,
   });
@@ -24,12 +22,6 @@ class CustomCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 50,
-              color: Colors.blue,
-            ),
-            SizedBox(height: 10),
             Text(
               title,
               style: TextStyle(
