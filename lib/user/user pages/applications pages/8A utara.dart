@@ -61,13 +61,14 @@ class _utaraPageState extends State<utaraPage> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("$BaseUrl/eightA");
+      final url = Uri.parse("$BaseUrl/eightAcertificate");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields['addedBy'] = adhar;
+
       // Add files to the request
       for (var entry in _fileNames.entries) {
         if (entry.value != "No file selected") {
@@ -175,7 +176,7 @@ class _utaraPageState extends State<utaraPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    "अर्जदाराचे ओळखपत्र",
+                    "7/12 उतारा",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -194,7 +195,7 @@ class _utaraPageState extends State<utaraPage> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("शाळा सोडल्याचा दाखला ",
+                  child: Text("खरेदी पत्र / बक्षीस पत्र",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
@@ -210,7 +211,7 @@ class _utaraPageState extends State<utaraPage> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("वडिलांचे ओळखपत्र",
+                  child: Text("चतुर सीमा (100 रुपयांचा बॉन्ड पेपर)",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
@@ -226,7 +227,7 @@ class _utaraPageState extends State<utaraPage> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text("आईचे ओळखपत्र",
+                  child: Text("आणेवारी संमती पत्र",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),

@@ -18,7 +18,9 @@ class ViewUploadedFiles extends StatefulWidget {
 }
 
 class _ViewUploadedFilesState extends State<ViewUploadedFiles> {
-  List<dynamic>? uploadedFiles; // ✅ Use List<dynamic> to handle JSON list
+  List<dynamic>? uploadedFiles;
+  late final String uname;
+  late final String mob;
 
   Future<void> fetchUploadedFiles() async {
     try {
@@ -26,9 +28,10 @@ class _ViewUploadedFilesState extends State<ViewUploadedFiles> {
           "$BaseUrl/birthregister?uname=${widget.uname}&mob=${widget.mob}");
       final response = await http.get(url);
 
+      //print("name & mob : $uname , $mob");
+
       if (response.statusCode == 200) {
-        final List<dynamic> responseData =
-            jsonDecode(response.body); // ✅ Decode as List
+        final List<dynamic> responseData = jsonDecode(response.body);
         setState(() {
           uploadedFiles = responseData;
         });
@@ -57,13 +60,10 @@ class _ViewUploadedFilesState extends State<ViewUploadedFiles> {
               : ListView.builder(
                   itemCount: uploadedFiles!.length,
                   itemBuilder: (context, index) {
-                    final file = uploadedFiles![index]
-                        as Map<String, dynamic>; // ✅ Convert to Map
+                    final file = uploadedFiles![index] as Map<String, dynamic>;
                     return ListTile(
-                      title: Text(file['name'] ??
-                          "no name found"), // ✅ Get the file type from the Map
-                      subtitle: Text(file['path'] ??
-                          "path is not found"), // ✅ Get the file path from the Map
+                      title: Text(file['name'] ?? "no name found"),
+                      subtitle: Text(file['path'] ?? "path is not found"),
                       trailing: Icon(Icons.download),
                       onTap: () {
                         // Implement file download

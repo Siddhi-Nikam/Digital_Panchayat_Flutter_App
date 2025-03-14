@@ -46,7 +46,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.home, color: Colors.blue),
-            title: const Text('डॅशबोर्ड'),
+            title: const Text(
+              'डॅशबोर्ड',
+              style: TextStyle(fontSize: 20),
+            ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.push(
@@ -60,7 +63,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.edit_document, color: Colors.blue),
-            title: const Text('अर्ज करा'),
+            title: const Text(
+              'अर्ज करा',
+              style: TextStyle(fontSize: 20),
+            ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -75,7 +81,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             leading:
                 const Icon(Icons.integration_instructions, color: Colors.blue),
-            title: const Text('येणाऱ्या सूचना'),
+            title: const Text(
+              'येणाऱ्या सूचना',
+              style: TextStyle(fontSize: 20),
+            ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -88,7 +97,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             leading:
                 const Icon(Icons.miscellaneous_services, color: Colors.blue),
-            title: const Text('सेवा'),
+            title: const Text(
+              'सेवा',
+              style: TextStyle(fontSize: 20),
+            ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -102,7 +114,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.money, color: Colors.blue),
-            title: const Text('घरपट्टी आणि पाणी पट्टी'),
+            title: const Text(
+              'घरपट्टी आणि पाणी पट्टी',
+              style: TextStyle(fontSize: 20),
+            ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -116,7 +131,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.report, color: Colors.blue),
-            title: const Text('समस्या'),
+            title: const Text(
+              'समस्या',
+              style: TextStyle(fontSize: 20),
+            ),
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.pushReplacement(
@@ -129,7 +147,10 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.add, color: Colors.blue),
-            title: const Text('तुमचे कुटुंब सदस्य जोडा'),
+            title: const Text(
+              'तुमचे कुटुंब सदस्य जोडा',
+              style: TextStyle(fontSize: 20),
+            ),
             trailing: IconButton(
                 onPressed: () {
                   Navigator.pop(context); // Close the drawer
@@ -167,8 +188,11 @@ class _AppDrawerState extends State<AppDrawer> {
                 child: Icon(Icons.logout, color: Colors.white)),
             title: const Text(
               'लॉगआउट करा',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
             onTap: () {
               logout(context);

@@ -4,25 +4,26 @@ import 'dart:convert';
 import 'uploadedfiles.dart';
 import '../../../config.dart';
 
-class BirthCertificate extends StatefulWidget {
-  const BirthCertificate({super.key});
+class deathCertificate extends StatefulWidget {
+  const deathCertificate({super.key});
 
   @override
-  _BirthCertificateState createState() => _BirthCertificateState();
+  _deathCertificateState createState() => _deathCertificateState();
 }
 
-class _BirthCertificateState extends State<BirthCertificate> {
+class _deathCertificateState extends State<deathCertificate> {
   late Future<List<Map<String, dynamic>>> _futureCertificates;
 
   @override
   void initState() {
     super.initState();
-    _futureCertificates = fetchBirthCertificates();
+    _futureCertificates = fetchdeathCertificates();
   }
 
-  Future<List<Map<String, dynamic>>> fetchBirthCertificates() async {
+  Future<List<Map<String, dynamic>>> fetchdeathCertificates() async {
     try {
-      final response = await http.get(Uri.parse('$BaseUrl/birthregister'));
+      final response =
+          await http.get(Uri.parse('$BaseUrl/fetchdeathCertificate'));
       //print('Response Code: ${response.statusCode}');
       //print('Response Body: ${response.body}');
 
@@ -73,7 +74,7 @@ class _BirthCertificateState extends State<BirthCertificate> {
               if (data.isEmpty) {
                 return const Center(
                     child: Text(
-                  'No Birth Certificates Found',
+                  'Data Not Found',
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ));
               }

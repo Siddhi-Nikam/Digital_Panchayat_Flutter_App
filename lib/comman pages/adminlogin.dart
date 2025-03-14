@@ -77,7 +77,9 @@ class _AdminloginState extends State<Adminlogin> {
             ),
           );
         } else {
-          showErrorToast();
+          if (mounted) {
+            showErrorToast();
+          }
         }
       } catch (e) {
         showErrorToast();

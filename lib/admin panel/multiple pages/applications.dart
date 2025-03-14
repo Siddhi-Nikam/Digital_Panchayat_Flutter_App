@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../reusable component/card_component.dart';
 import '../admindrawer.dart';
 import 'applied_applications/birth_certificates.dart';
+import 'applied_applications/birthcertificaterequest.dart';
 
 class applications extends StatefulWidget {
   const applications({super.key});
@@ -15,18 +16,12 @@ class applications extends StatefulWidget {
 
 class applicationsState extends State {
   final List<Map<String, dynamic>> cardData = [
-    {
-      "icon": FontAwesomeIcons.baby,
-      "title": "Birth Registrations",
-      "route": BirthCertificate()
-    },
-    {
-      "icon": Icons.app_registration,
-      "title": "Birth Certificate Request",
-      "route": ()
-    },
-    {"icon": Icons.settings, "title": "Settings", "route": ()},
-    {"icon": Icons.phone, "title": "Contact Us", "route": ()},
+    {"title": "जन्म नोंदणी", "route": BirthCertificate()},
+    {"title": "जन्माचा दाखला", "route": BirthCertificaterequest()},
+    {"title": "मृत्यू प्रमाणपत्र", "route": ()},
+    {"title": "विवाह प्रमाणपत्र", "route": ()},
+    {"title": "8A उतारा", "route": ()},
+    {"title": "निराधार दाखला", "route": ()},
   ];
   @override
   Widget build(BuildContext context) {
@@ -35,8 +30,7 @@ class applicationsState extends State {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         iconTheme: IconThemeData(color: Colors.white),
-        title:
-            const Text("Applications", style: TextStyle(color: Colors.white)),
+        title: const Text("अर्ज", style: TextStyle(color: Colors.white)),
       ),
       drawer: const AdminDrawer(),
       body: Padding(
@@ -48,7 +42,7 @@ class applicationsState extends State {
             mainAxisSpacing: 10, // Vertical spacing between cards
             childAspectRatio: 3 / 2, // Width to height ratio of each card
           ),
-          itemCount: 4, // Number of cards
+          itemCount: 6, // Number of cards
           itemBuilder: (context, index) {
             final data = cardData[index];
             return CustomCard(

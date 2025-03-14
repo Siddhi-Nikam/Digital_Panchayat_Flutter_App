@@ -90,6 +90,7 @@ class BirthCertificateState extends State<BirthCertificate> {
 
       if (response.statusCode == 200) {
         print("Files uploaded successfully!");
+
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
           content: Text("Request submitted successfully"),
@@ -218,7 +219,6 @@ class BirthCertificateState extends State<BirthCertificate> {
               text: 'सबमिट करा',
               onPressed: () {
                 _submitFiles();
-                _fileNames.clear();
               },
               bg_color: Colors.blue,
               textcolor: Colors.white,

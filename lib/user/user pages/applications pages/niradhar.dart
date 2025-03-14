@@ -61,7 +61,7 @@ class _NiradharState extends State<Niradhar> {
   Future<void> _submitFiles() async {
     try {
       // API endpoint
-      final url = Uri.parse("$BaseUrl/");
+      final url = Uri.parse("$BaseUrl/niradharregi");
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
@@ -244,7 +244,6 @@ class _NiradharState extends State<Niradhar> {
                 text: 'सबमिट करा',
                 onPressed: () {
                   _submitFiles();
-                  _fileNames.clear();
                 },
                 bg_color: Colors.blue,
                 textcolor: Colors.white,

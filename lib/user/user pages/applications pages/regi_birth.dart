@@ -94,8 +94,9 @@ class RegiBirthState extends State<RegiBirth> {
           backgroundColor: Colors.blue,
           content: Text("Request submitted successfully"),
         ));
-
+        print(response.statusCode);
         print("Files uploaded successfully!");
+        _fileNames.clear();
       } else {
         print("Failed to upload files. Error: ${response.reasonPhrase}");
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -292,7 +293,6 @@ class RegiBirthState extends State<RegiBirth> {
                   text: 'सबमिट करा',
                   onPressed: () {
                     _submitFiles();
-                    _fileNames.clear();
                   },
                   bg_color: Colors.blue,
                   textcolor: Colors.white,

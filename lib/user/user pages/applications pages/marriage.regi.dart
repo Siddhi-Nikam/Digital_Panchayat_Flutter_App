@@ -24,6 +24,7 @@ class Marriage_regi extends StatefulWidget {
 class Marriage_regiState extends State<Marriage_regi> {
   late String uname;
   late String mob;
+  late String adhar;
   @override
   void initState() {
     super.initState();
@@ -33,6 +34,7 @@ class Marriage_regiState extends State<Marriage_regi> {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
+      adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
     }
@@ -80,6 +82,10 @@ class Marriage_regiState extends State<Marriage_regi> {
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
+
+      request.fields['uname'] = uname;
+      request.fields['mob'] = mob;
+      request.fields["addedBy"] = adhar;
 
       // Add files to the request
       for (var entry in _fileNames.entries) {

@@ -75,7 +75,7 @@ class _PaymentPageState extends State<PaymentPage> {
       'key': 'rzp_test_XXXXXXXXXXXXXX', // Replace with your Razorpay Key ID
       'amount': (amount * 100).toInt(), // Convert to paise
       'name': 'Siddhi Ashok Nikam',
-      'description': 'Payment for E-gram Panchayat Tx payment',
+      'description': 'Payment for E-gram Panchayat Tax payment',
       'prefill': {
         'contact': mob, // Use extracted mobile number from token
         'email': 'user@example.com',

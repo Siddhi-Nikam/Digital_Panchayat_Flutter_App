@@ -182,7 +182,7 @@ class DeathRegiState extends State<DeathRegi> {
               text: 'मृत व्यक्तीचे आधार कार्ड',
             ),
             FilePickerRow(
-              fileName: _fileNames["personId"]!,
+              fileName: _fileNames["personId"],
               onPickFile: () {
                 _pickFile("personId");
               },
@@ -191,7 +191,7 @@ class DeathRegiState extends State<DeathRegi> {
               text: 'मृत्यु नोंद मागणी अर्ज',
             ),
             FilePickerRow(
-              fileName: _fileNames["application"]!,
+              fileName: _fileNames["application"],
               onPickFile: () {
                 _pickFile("application");
               },
@@ -200,7 +200,7 @@ class DeathRegiState extends State<DeathRegi> {
               text: 'मृत व्यक्तीचा रहिवासी दाखला',
             ),
             FilePickerRow(
-              fileName: _fileNames["recidence"]!,
+              fileName: _fileNames["recidence"],
               onPickFile: () {
                 _pickFile("recidence");
               },
@@ -209,7 +209,7 @@ class DeathRegiState extends State<DeathRegi> {
               text: 'साक्षीदारचे आधार कार्ड ',
             ),
             FilePickerRow(
-              fileName: _fileNames["witnessId"]!,
+              fileName: _fileNames["witnessId"],
               onPickFile: () {
                 _pickFile("witnessId");
               },
@@ -218,7 +218,6 @@ class DeathRegiState extends State<DeathRegi> {
               text: 'सबमिट करा',
               onPressed: () {
                 _submitFiles();
-                _fileNames.clear();
               },
               bg_color: Colors.blue,
               textcolor: Colors.white,
