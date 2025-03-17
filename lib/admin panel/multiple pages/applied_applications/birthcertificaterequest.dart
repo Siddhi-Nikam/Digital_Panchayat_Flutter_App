@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../config.dart';
+import '../uploadedFileforApplictiona/BirthCertificateUploadedfiles.dart';
 
 class BirthCertificaterequest extends StatefulWidget {
   const BirthCertificaterequest({super.key});
@@ -104,16 +105,12 @@ class _BirthCertificatereqyestState extends State<BirthCertificaterequest> {
                       color: Colors.blue,
                     ),
                     onTap: () {
-                      // Navigate to the details page
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ViewUploadedFiles(
-                      //       uname: data[index]['uname'],
-                      //       mob: data[index]['mob'],
-                      //     ),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Birthcertificateuploadedfiles(),
+                        ),
+                      );
                     },
                   );
                 },
