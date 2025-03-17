@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'uploadedfiles.dart';
+import '../uploadedFileforApplictiona/BirthRegiUploadedfiles.dart';
 import '../../../config.dart';
 
 class BirthCertificate extends StatefulWidget {
@@ -52,7 +52,7 @@ class _BirthCertificateState extends State<BirthCertificate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Birth Certificates',
+        title: const Text('Birth Registration Requests',
             style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -108,9 +108,9 @@ class _BirthCertificateState extends State<BirthCertificate> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ViewUploadedFiles(
-                            uname: data[index]['uname'],
-                            mob: data[index]['mob'],
-                          ),
+                              // uname: data[index]['uname'],
+                              // mob: data[index]['mob'],
+                              ),
                         ),
                       );
                     },

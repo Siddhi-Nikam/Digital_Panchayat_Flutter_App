@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'uploadedfiles.dart';
 import '../../../config.dart';
 
 class deathCertificate extends StatefulWidget {
@@ -53,7 +52,7 @@ class _deathCertificateState extends State<deathCertificate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Birth Certificates',
+        title: const Text('Death Certificates Requests',
             style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -105,15 +104,16 @@ class _deathCertificateState extends State<deathCertificate> {
                     ),
                     onTap: () {
                       // Navigate to the details page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ViewUploadedFiles(
-                            uname: data[index]['uname'],
-                            mob: data[index]['mob'],
-                          ),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => ViewUploadedFiles(
+                      //       uname: data[index]['uname'],
+                      //       mob: data[index]['mob'],
+
+                      //     ),
+                      //   ),
+                      // );
                     },
                   );
                 },

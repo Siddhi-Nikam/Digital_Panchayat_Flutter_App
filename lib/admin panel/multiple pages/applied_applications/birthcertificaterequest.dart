@@ -23,7 +23,7 @@ class _BirthCertificatereqyestState extends State<BirthCertificaterequest> {
   Future<List<Map<String, dynamic>>> fetchBirthCertificatesrequest() async {
     try {
       final response =
-          await http.get(Uri.parse('$BaseUrl/fetchdeathCertificate'));
+          await http.get(Uri.parse('$BaseUrl/getbirthCertificate'));
       //print('Response Code: ${response.statusCode}');
       print('Response Body: ${response.body}');
 
@@ -53,7 +53,7 @@ class _BirthCertificatereqyestState extends State<BirthCertificaterequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Birth Certificates',
+        title: const Text('Birth Certificates Requests',
             style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         iconTheme: const IconThemeData(color: Colors.white),

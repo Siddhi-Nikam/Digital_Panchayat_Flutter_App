@@ -25,9 +25,9 @@ class CustomCard extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
             ),
           ],
         ),

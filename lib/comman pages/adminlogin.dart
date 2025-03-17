@@ -82,7 +82,9 @@ class _AdminloginState extends State<Adminlogin> {
           }
         }
       } catch (e) {
-        showErrorToast();
+        if (mounted) {
+          showErrorToast();
+        }
         print("Error: $e");
       }
     }
