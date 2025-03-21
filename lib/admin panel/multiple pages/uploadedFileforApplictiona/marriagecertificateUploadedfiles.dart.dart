@@ -5,21 +5,30 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../configs/config.dart';
 
-class Birthcertificateuploadedfiles extends StatefulWidget {
-  const Birthcertificateuploadedfiles({super.key});
+class ViewUploadedFiles extends StatefulWidget {
+  const ViewUploadedFiles({super.key});
 
   @override
-  _BirthcertificateuploadedfilesState createState() =>
-      _BirthcertificateuploadedfilesState();
+  _ViewUploadedFilesState createState() => _ViewUploadedFilesState();
 }
 
-class _BirthcertificateuploadedfilesState
-    extends State<Birthcertificateuploadedfiles> {
+class _ViewUploadedFilesState extends State<ViewUploadedFiles> {
   List filenames = [
-    'वडिलांचे ओळखपत्र',
-    'आईचे ओळखपत्र',
-    'जन्म स्थान संबंधी पुरावा',
-    'पालकांच्या लग्नाचे प्रमाणपत्र'
+    'वर फोटो',
+    "वधू फोटो",
+    "वर चे आधार कार्ड",
+    "वधू चे आधार कार्ड",
+    "वरचा शाळा सोडल्याचा दाखला ",
+    "वधूचा शाळा सोडल्याचा दाखला",
+    " साक्षीदार 1 फोटो",
+    "साक्षीदारचे आधार कार्ड",
+    " साक्षीदार 2 फोटो ",
+    "साक्षीदारचे आधार कार्ड",
+    "साक्षीदार 3 फोटो",
+    "साक्षीदारचे आधार कार्ड",
+    "लग्नपत्रिका",
+    "लग्नाचा ब्राह्मण सोबत फोटो",
+    "विवाह नोंदणी अर्ज"
   ];
   List<Map<String, String>> uploadedFiles = [];
   bool isLoading = true;
@@ -28,7 +37,7 @@ class _BirthcertificateuploadedfilesState
   Future<void> fetchUploadedFiles() async {
     try {
       final url =
-          Uri.parse("$BaseUrl/getbirthCertificateByAddedBy/7226 3704 2888");
+          Uri.parse("$BaseUrl/getmarriageCertificateByAddedBy/7226 3704 2888");
       final response = await http.get(url);
 
       print("Response Status: ${response.statusCode}");

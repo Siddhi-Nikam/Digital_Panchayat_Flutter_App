@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:digitalpanchayat/config.dart';
+import 'package:digitalpanchayat/configs/config.dart';
 import 'package:flutter/material.dart';
 //import 'package:digitalpanchayat/config.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';

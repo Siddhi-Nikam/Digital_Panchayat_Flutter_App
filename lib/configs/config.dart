@@ -1,6 +1,5 @@
 const BaseUrl = "http://10.0.3.97:4000";
 
-const registration_url = 'http://10.0.2.2:4000/registration';
 const login_url = "http://10.0.2.2:4000/login";
 const adminlogin_url = "http://10.0.2.2:4000/adminlogin";
 const add_instruction = "http://10.0.2.2:4000/instructions";

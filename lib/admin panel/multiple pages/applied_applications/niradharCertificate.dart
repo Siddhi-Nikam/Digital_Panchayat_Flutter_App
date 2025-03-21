@@ -2,30 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../configs/config.dart';
-import '../uploadedFileforApplictiona/BirthCertificateUploadedfiles.dart';
+import '../uploadedFileforApplictiona/marriagecertificateUploadedfiles.dart.dart';
 
-class BirthCertificaterequest extends StatefulWidget {
-  const BirthCertificaterequest({super.key});
+class Niradharcertificate extends StatefulWidget {
+  const Niradharcertificate({super.key});
 
   @override
-  _BirthCertificatereqestState createState() => _BirthCertificatereqestState();
+  _NiradharcertificateState createState() => _NiradharcertificateState();
 }
 
-class _BirthCertificatereqestState extends State<BirthCertificaterequest> {
+class _NiradharcertificateState extends State<Niradharcertificate> {
   late Future<List<Map<String, dynamic>>> _futureCertificates;
 
   @override
   void initState() {
     super.initState();
-    _futureCertificates = fetchBirthCertificatesrequest();
+    _futureCertificates = fetchNiradharCertificates();
   }
 
-  Future<List<Map<String, dynamic>>> fetchBirthCertificatesrequest() async {
+  Future<List<Map<String, dynamic>>> fetchNiradharCertificates() async {
     try {
       final response =
-          await http.get(Uri.parse('$BaseUrl/getbirthCertificate'));
+          await http.get(Uri.parse('$BaseUrl/getniradharCertificate'));
       //print('Response Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
+      //print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         var decodedData = jsonDecode(response.body);
@@ -53,8 +53,8 @@ class _BirthCertificatereqestState extends State<BirthCertificaterequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Birth Certificates Requests',
-            style: TextStyle(color: Colors.white)),
+        title:
+            const Text('निराधार दाखला', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -74,7 +74,7 @@ class _BirthCertificatereqestState extends State<BirthCertificaterequest> {
               if (data.isEmpty) {
                 return const Center(
                     child: Text(
-                  'No Birth Certificates Found',
+                  'No Certificates Found',
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ));
               }
@@ -100,14 +100,15 @@ class _BirthCertificatereqestState extends State<BirthCertificaterequest> {
                           color: Colors.blue, fontWeight: FontWeight.bold),
                     ),
                     trailing: const Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.arrow_forward_ios_outlined,
                       color: Colors.blue,
                     ),
                     onTap: () {
+                      // Navigate to the details page
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Birthcertificateuploadedfiles(),
+                          builder: (context) => ViewUploadedFiles(),
                         ),
                       );
                     },

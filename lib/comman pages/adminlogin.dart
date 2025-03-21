@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:digitalpanchayat/config.dart';
+import 'package:digitalpanchayat/configs/config.dart';
 import '../admin panel/admindashboard.dart';
 
 class Adminlogin extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:http/http.dart' as http;
-import '../../config.dart';
+import '../../configs/config.dart';
 import '../outter pages/userdrawer.dart';
 import 'addedfam.dart';
 //import 'package:shared_preferences/shared_preferences.dart';

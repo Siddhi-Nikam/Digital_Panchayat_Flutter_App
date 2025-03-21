@@ -4,6 +4,9 @@ import '../admindrawer.dart';
 import 'applied_applications/birth_certificates.dart';
 import 'applied_applications/birthcertificaterequest.dart';
 import 'applied_applications/deathcertificate.dart';
+import 'applied_applications/eightACertificate.dart';
+import 'applied_applications/marriageCertificate.dart';
+import 'applied_applications/niradharCertificate.dart';
 
 class applications extends StatefulWidget {
   const applications({super.key});
@@ -19,9 +22,9 @@ class applicationsState extends State {
     {"title": "जन्म नोंदणी", "route": BirthCertificate()},
     {"title": "जन्माचा दाखला", "route": BirthCertificaterequest()},
     {"title": "मृत्यू प्रमाणपत्र", "route": deathCertificate()},
-    {"title": "विवाह प्रमाणपत्र", "route": ()},
-    {"title": "8A उतारा", "route": ()},
-    {"title": "निराधार दाखला", "route": ()},
+    {"title": "विवाह प्रमाणपत्र", "route": Marriagecertificate()},
+    {"title": "8A उतारा", "route": Eightacertificate()},
+    {"title": "निराधार दाखला", "route": Niradharcertificate()},
   ];
   @override
   Widget build(BuildContext context) {

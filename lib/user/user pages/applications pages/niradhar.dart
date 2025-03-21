@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
-import '../../../config.dart';
+import '../../../configs/config.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
 

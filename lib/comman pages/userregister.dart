@@ -4,7 +4,7 @@ import 'package:digitalpanchayat/comman%20pages/userlogin.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:digitalpanchayat/config.dart';
+import 'package:digitalpanchayat/configs/config.dart';
 
 class Userregister extends StatefulWidget {
   const Userregister({super.key});
@@ -114,7 +114,7 @@ class _UserregisterState extends State<Userregister> {
         };
 
         var response = await http.post(
-          Uri.parse(registration_url),
+          Uri.parse("$BaseUrl/registration"),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(regbody),
         );

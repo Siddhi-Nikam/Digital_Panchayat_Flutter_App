@@ -2,20 +2,22 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import '../../../configs/config.dart';
 
-import '../../../config.dart';
-
-class ViewUploadedFiles extends StatefulWidget {
-  const ViewUploadedFiles({super.key});
+class Birthregicertificateuploadedfiles extends StatefulWidget {
+  final String data;
+  const Birthregicertificateuploadedfiles(this.data, {super.key});
 
   @override
-  _ViewUploadedFilesState createState() => _ViewUploadedFilesState();
+  _BirthregicertificateuploadedfilesfileState createState() =>
+      _BirthregicertificateuploadedfilesfileState();
 }
 
-class _ViewUploadedFilesState extends State<ViewUploadedFiles> {
+class _BirthregicertificateuploadedfilesfileState
+    extends State<Birthregicertificateuploadedfiles> {
   List filenames = [
-    'पालकांच्या लग्नाचे प्रमाणपत्र',
-    "शाळा सोडल्याचा दाखला",
+    "अर्जदाराचे ओळखपत्र",
+    "शाळा सोडल्याचा दाखला ",
     "वडिलांचे ओळखपत्र",
     "आईचे ओळखपत्र",
     "जन्म झालेल्या रुग्णालयाचे प्रमाणपत्र",
@@ -24,10 +26,11 @@ class _ViewUploadedFilesState extends State<ViewUploadedFiles> {
   List<Map<String, String>> uploadedFiles = [];
   bool isLoading = true;
   String errorMessage = "";
+  late String addedBy = widget.data;
 
   Future<void> fetchUploadedFiles() async {
     try {
-      final url = Uri.parse("$BaseUrl/getbirthByAddedBy/7226 3704 2888");
+      final url = Uri.parse("$BaseUrl/getbirthByAddedBy/$addedBy");
       final response = await http.get(url);
 
       print("Response Status: ${response.statusCode}");

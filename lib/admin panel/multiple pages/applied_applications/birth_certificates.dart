@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../uploadedFileforApplictiona/BirthRegiUploadedfiles.dart';
-import '../../../config.dart';
+import '../../../configs/config.dart';
+import '../uploadedFileforApplictiona/birthRegiCertificateUploadedFiles.dart';
 
 class BirthCertificate extends StatefulWidget {
   const BirthCertificate({super.key});
@@ -107,11 +107,9 @@ class _BirthCertificateState extends State<BirthCertificate> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ViewUploadedFiles(
-                              // uname: data[index]['uname'],
-                              // mob: data[index]['mob'],
-                              ),
-                        ),
+                            builder: (context) =>
+                                Birthregicertificateuploadedfiles(
+                                    data[index]['addedBy'])),
                       );
                     },
                   );

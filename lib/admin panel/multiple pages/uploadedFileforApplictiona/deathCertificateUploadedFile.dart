@@ -5,21 +5,21 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../configs/config.dart';
 
-class Birthcertificateuploadedfiles extends StatefulWidget {
-  const Birthcertificateuploadedfiles({super.key});
+class Deathcertificateuploadedfile extends StatefulWidget {
+  const Deathcertificateuploadedfile({super.key});
 
   @override
-  _BirthcertificateuploadedfilesState createState() =>
-      _BirthcertificateuploadedfilesState();
+  _DeathcertificateuploadedfileState createState() =>
+      _DeathcertificateuploadedfileState();
 }
 
-class _BirthcertificateuploadedfilesState
-    extends State<Birthcertificateuploadedfiles> {
+class _DeathcertificateuploadedfileState
+    extends State<Deathcertificateuploadedfile> {
   List filenames = [
-    'वडिलांचे ओळखपत्र',
-    'आईचे ओळखपत्र',
-    'जन्म स्थान संबंधी पुरावा',
-    'पालकांच्या लग्नाचे प्रमाणपत्र'
+    "मृत व्यक्तीचे आधार कार्ड",
+    " मृत्यु नोंद मागणी अर्ज",
+    'मृत व्यक्तीचा रहिवासी दाखला',
+    'साक्षीदारचे आधार कार्ड '
   ];
   List<Map<String, String>> uploadedFiles = [];
   bool isLoading = true;
@@ -28,7 +28,7 @@ class _BirthcertificateuploadedfilesState
   Future<void> fetchUploadedFiles() async {
     try {
       final url =
-          Uri.parse("$BaseUrl/getbirthCertificateByAddedBy/7226 3704 2888");
+          Uri.parse("$BaseUrl/getdeathcertificateByAddedBy/7226 3704 2888");
       final response = await http.get(url);
 
       print("Response Status: ${response.statusCode}");

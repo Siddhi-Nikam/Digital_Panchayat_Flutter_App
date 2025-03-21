@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:digitalpanchayat/config.dart';
+import 'package:digitalpanchayat/configs/config.dart';
 import 'package:digitalpanchayat/user/outter%20pages/userdrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

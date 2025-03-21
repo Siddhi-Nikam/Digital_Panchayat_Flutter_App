@@ -1,4 +1,3 @@
-//import 'package:digitalpanchayat/comman%20pages/buttons.dart';
 import 'package:digitalpanchayat/user/logout.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -8,7 +7,7 @@ import '../user pages/apply.dart';
 import '../user pages/cominginstuc.dart';
 import '../user pages/newserv.dart';
 import '../user pages/sendissue.dart';
-import '../user pages/tax.dart';
+import '../user pages/tax pages/tax.dart';
 import 'userdashboard.dart';
 
 class AppDrawer extends StatefulWidget {
