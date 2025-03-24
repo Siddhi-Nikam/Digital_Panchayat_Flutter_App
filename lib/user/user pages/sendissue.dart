@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:digitalpanchayat/configs/config.dart';
 import 'package:digitalpanchayat/user/outter%20pages/userdrawer.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class issue extends StatefulWidget {
   final String token;
@@ -17,17 +17,22 @@ class issue extends StatefulWidget {
 }
 
 class _ServiceState extends State<issue> {
-  File? _image;
   final issue_title = TextEditingController();
   final issue_desp = TextEditingController();
-  final ImagePicker _picker = ImagePicker();
+  late String uname;
+  late String mob;
 
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path); // Store the selected image
-      });
+  @override
+  void initState() {
+    super.initState();
+
+    // Decode JWT token and extract the necessary fields
+    try {
+      Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
+      uname = jwtdecodetoken['uname'];
+      mob = jwtdecodetoken['mob'];
+    } catch (e) {
+      print('Token format is invalid: $e');
     }
   }
 
@@ -50,7 +55,8 @@ class _ServiceState extends State<issue> {
       var regbody = {
         "title": issue_title.text,
         "descp": issue_desp.text,
-        "image": _image.toString()
+        "uname": uname,
+        "mob": mob
       };
       var response = await http.post(
         Uri.parse('$BaseUrl/createIssue'),

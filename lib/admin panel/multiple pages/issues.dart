@@ -129,7 +129,31 @@ class issuesState extends State {
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        content: Text(data[index]['descp']),
+                                        content: SizedBox(
+                                          height: 100,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data[index]['descp'],
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                  "Send By : ${data[index]['uname']}"),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                  "Mobile Number : ${data[index]['mob']}")
+                                            ],
+                                          ),
+                                        ),
                                         actions: [
                                           TextButton(
                                               onPressed: () =>
