@@ -6,7 +6,7 @@ import 'multiple pages/applications.dart';
 import 'multiple pages/instruction.dart';
 import 'multiple pages/issues.dart';
 import 'multiple pages/services.dart';
-import 'paid_tax.dart';
+import 'multiple pages/paid_tax.dart';
 
 class AdminDrawer extends StatelessWidget {
   const AdminDrawer({super.key});

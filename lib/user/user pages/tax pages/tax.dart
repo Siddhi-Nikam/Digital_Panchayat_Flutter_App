@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:digitalpanchayat/keys.dart';
-import 'package:digitalpanchayat/user/user%20pages/tax%20pages/paymentSuccessed.dart';
+//import 'package:digitalpanchayat/user/user%20pages/tax%20pages/paymentSuccessed.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import '../../../configs/config.dart';
 import '../../outter pages/userdrawer.dart';
 import '../../../reusable component/button.dart';
 import 'package:http/http.dart' as http;
@@ -23,6 +24,32 @@ class _PaymentPageState extends State<PaymentPage> {
   Map<String, dynamic>? intentPaymentData;
   final TextEditingController _amountController = TextEditingController();
 
+  Future payment_confirmation() async {
+    try {
+      var regbody = {
+        "uname": uname,
+        "mob": mob.toString(),
+        "amount": double.tryParse(_amountController.text.trim()) ?? 0,
+        "status": "Successful.!",
+        "payment_id": "${intentPaymentData?["id"]}"
+      };
+      var response = await http.post(
+        Uri.parse('$BaseUrl/postPayment'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(regbody),
+      );
+      print(regbody);
+      // Handle the response
+      if (response.statusCode == 200) {
+        print('Payment added successfully');
+      } else {
+        print('Failed to add: ${response.body}');
+      }
+    } catch (err) {
+      print("Response error : $err");
+    }
+  }
+
   /// Show the payment sheet and confirm the payment
   showPaymentSheet() async {
     try {
@@ -37,14 +64,16 @@ class _PaymentPageState extends State<PaymentPage> {
           });
         } else {
           // Payment successful if no action is required
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                backgroundColor: Colors.green,
-                content: Text(
-                  "Payment Successful! ",
-                  style: TextStyle(color: Colors.white),
-                )),
-          );
+
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //       backgroundColor: Colors.green,
+          //       content: Text(
+          //         "Payment Successful! ",
+          //         style: TextStyle(color: Colors.white),
+          //       )),
+          // );
+          payment_confirmation();
         }
       }).onError((errorMsg, sTrace) {
         if (kDebugMode) {
@@ -150,12 +179,11 @@ class _PaymentPageState extends State<PaymentPage> {
 
       if (confirmResponse.statusCode == 200) {
         var data = jsonDecode(confirmResponse.body);
+        payment_confirmation();
         if (data["status"] == "succeeded") {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Paymentsuccessed()));
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(content:  Text("Payment Successful! ✅")),
-          // );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Payment Successful! ✅")),
+          );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Payment Failed: ${data["status"]} ❌")),
@@ -308,7 +336,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   }
 
                   // Initialize Payment
-                  paymentSheetInitialization(amount.toString(), "USD");
+                  paymentSheetInitialization(amount.toString(), "INR");
                 },
                 bg_color: Colors.blue,
                 textcolor: Colors.white,

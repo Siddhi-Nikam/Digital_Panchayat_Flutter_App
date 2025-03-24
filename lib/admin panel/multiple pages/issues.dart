@@ -115,7 +115,7 @@ class issuesState extends State {
                             ),
                             subtitle: const Text("More information.."),
                             trailing: const Icon(
-                              Icons.arrow_forward,
+                              Icons.arrow_forward_ios,
                               color: Colors.blue,
                             ),
                             onTap: () {
