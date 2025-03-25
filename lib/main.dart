@@ -1,12 +1,14 @@
 import 'package:digitalpanchayat/comman%20pages/buttons.dart';
-import 'package:digitalpanchayat/keys.dart';
+import 'package:digitalpanchayat/configs/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+//import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = PublishKey;
   await Stripe.instance.applySettings();
+
   runApp(const MyApp());
 }
 
