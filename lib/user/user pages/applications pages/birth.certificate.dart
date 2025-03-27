@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -5,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:digitalpanchayat/configs/config.dart';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
+import '../../../firebase_api.dart';
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file.text.dart';
 import '../../../reusable component/file_picking.dart';
@@ -38,6 +41,31 @@ class BirthCertificateState extends State<BirthCertificate> {
       adhar = jwtdecodetoken['adhar'];
     } catch (e) {
       print('Token format is invalid: $e');
+    }
+  }
+
+  Future<void> _sendPushNotification(
+      String token, String title, String body) async {
+    final url = Uri.parse("$BaseUrl/send-notification");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "token": token,
+          "title": title,
+          "body": body,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print("Notification sent successfully! $token ,$title, $body ");
+      } else {
+        print("Failed to send notification. Error: ${response.body}");
+      }
+    } catch (e) {
+      print("Error sending notification: $e");
     }
   }
 
@@ -91,10 +119,14 @@ class BirthCertificateState extends State<BirthCertificate> {
       if (response.statusCode == 200) {
         print("Files uploaded successfully!");
 
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.blue,
-          content: Text("Request submitted successfully"),
-        ));
+        String? fcmToken = await FirebaseApi().getFCMToken();
+        if (fcmToken != null) {
+          _sendPushNotification(
+            fcmToken,
+            "जन्म दाखला अर्ज यशस्वी",
+            "तुमचा अर्ज यशस्वीरित्या सबमिट झाला आहे.दाखला मिळविण्यासाठी ग्रामपंचायतीच्या संपर्कात रहा.",
+          );
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
