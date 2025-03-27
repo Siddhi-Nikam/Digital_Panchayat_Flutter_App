@@ -55,7 +55,7 @@ class _utaraPageState extends State<utaraPage> {
         if (fcmToken != null) {
           _sendPushNotification(
             fcmToken,
-            "जन्म दाखला अर्ज यशस्वी",
+            "8A उतारा अर्ज यशस्वी",
             "तुमचा अर्ज यशस्वीरित्या सबमिट झाला आहे.दाखला मिळविण्यासाठी ग्रामपंचायतीच्या संपर्कात रहा.",
           );
         }

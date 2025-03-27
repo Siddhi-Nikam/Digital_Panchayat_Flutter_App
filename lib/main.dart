@@ -4,8 +4,9 @@ import 'package:digitalpanchayat/firebase_api.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-
 import 'user/outter pages/notification.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const buttons(),
-      routes: {'NotificationPage': (context) => NotificationPage()},
+      navigatorKey: navigatorKey,
+      routes: {
+        'NotificationPage': (context) => NotificationPage(
+              data: {},
+              token: '',
+            ),
+      },
     );
   }
 }

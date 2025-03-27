@@ -1,87 +1,31 @@
-// import 'package:firebase_messaging/firebase_messaging.dart';
-// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-// class FirebaseApi {
-//   final _firebaseMessaging = FirebaseMessaging.instance;
-
-//   Future<void> ForegroundNotification() async {
-//     await FirebaseMessaging.instance
-//         .setForegroundNotificationPresentationOptions(
-//       alert: true,
-//       badge: true,
-//       sound: true,
-//     );
-//   }
-
-//   Future<void> requestNotificationPermissions() async {
-//     FirebaseMessaging messaging = FirebaseMessaging.instance;
-//     NotificationSettings settings = await messaging.requestPermission(
-//       alert: true,
-//       badge: true,
-//       sound: true,
-//     );
-
-//     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-//       print('User granted permission');
-//     } else {
-//       print('User declined or has not accepted permission');
-//     }
-//   }
-
-//   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//       FlutterLocalNotificationsPlugin();
-
-//   AndroidNotificationChannel channel = AndroidNotificationChannel(
-//     'high_importance_channel', // Channel ID
-//     'High Importance Notifications', // Channel name
-//     description:
-//         'This channel is used for important notifications.', // Description
-//     importance: Importance.high,
-//   );
-
-//   Future<void> setupFlutterNotifications() async {
-//     const AndroidInitializationSettings androidSettings =
-//         AndroidInitializationSettings('@mipmap/ic_launcher');
-//     const InitializationSettings initializationSettings =
-//         InitializationSettings(android: androidSettings);
-
-//     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-//     final platform =
-//         flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-//             AndroidFlutterLocalNotificationsPlugin>();
-//     await platform?.createNotificationChannel(channel);
-//   }
-
-// // Get the FCM token
-// Future<String?> getFCMToken() async {
-//   String? token = await _firebaseMessaging.getToken();
-//   print("FCM Token: $token");
-//   return token;
-// }
-
-//   // Initialize notifications
-//   Future<void> initNotifications() async {
-//     setupFlutterNotifications();
-//     await requestNotificationPermissions();
-//     await _firebaseMessaging.requestPermission();
-//   }
-// }
-
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'main.dart';
 
-Future<void> handleBackgroundMessage(RemoteMessage? message) async {
-  // print("title: E-grampachayat");
-  // print("body : Notification body");
-  // print("Payload : E-grampanchyat Notification");
-}
+Future<void> handleBackgroundMessage(RemoteMessage? message) async {}
 
 class FirebaseApi {
   final firebaseMessaging = FirebaseMessaging.instance;
 
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
+
+    // Extract data from the notification
+
+    String? title = message.notification?.title ?? 'No Title';
+    String? body = message.notification?.body ?? 'No Body';
+    Map<String, dynamic> data = message.data;
+
+    // Navigate to NotificationPage with data
+    navigatorKey.currentState?.pushNamed(
+      'NotificationPage',
+      arguments: {
+        'title': title,
+        'body': body,
+        'data': data,
+      },
+    );
   }
 
   Future initLocalNotification() async {

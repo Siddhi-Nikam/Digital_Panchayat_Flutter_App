@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../configs/config.dart';
+import '../../../firebase_api.dart';
 import '../../outter pages/userdrawer.dart';
 import '../../../reusable component/button.dart';
 import 'package:http/http.dart' as http;
@@ -23,6 +24,31 @@ class _PaymentPageState extends State<PaymentPage> {
   late String mob;
   Map<String, dynamic>? intentPaymentData;
   final TextEditingController _amountController = TextEditingController();
+
+  Future<void> _sendPushNotification(
+      String token, String title, String body) async {
+    final url = Uri.parse("$BaseUrl/send-notification");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "token": token,
+          "title": title,
+          "body": body,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print("Notification sent successfully! $token ,$title, $body ");
+      } else {
+        print("Failed to send notification. Error: ${response.body}");
+      }
+    } catch (e) {
+      print("Error sending notification: $e");
+    }
+  }
 
   Future payment_confirmation() async {
     try {
@@ -63,16 +89,6 @@ class _PaymentPageState extends State<PaymentPage> {
             confirmPaymentManually();
           });
         } else {
-          // Payment successful if no action is required
-
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(
-          //       backgroundColor: Colors.green,
-          //       content: Text(
-          //         "Payment Successful! ",
-          //         style: TextStyle(color: Colors.white),
-          //       )),
-          // );
           payment_confirmation();
         }
       }).onError((errorMsg, sTrace) {
@@ -117,6 +133,14 @@ class _PaymentPageState extends State<PaymentPage> {
       );
 
       if (responseFromStripeAPI.statusCode == 200) {
+        String? fcmToken = await FirebaseApi().getFCMToken();
+        if (fcmToken != null) {
+          _sendPushNotification(
+            fcmToken,
+            "Payment Successful",
+            "Payment Successfully Done to Grampanchayat",
+          );
+        }
         return jsonDecode(responseFromStripeAPI.body);
       } else {
         print("Failed to create payment intent: ${responseFromStripeAPI.body}");
@@ -180,6 +204,7 @@ class _PaymentPageState extends State<PaymentPage> {
       if (confirmResponse.statusCode == 200) {
         var data = jsonDecode(confirmResponse.body);
         payment_confirmation();
+
         if (data["status"] == "succeeded") {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Payment Successful! ✅")),

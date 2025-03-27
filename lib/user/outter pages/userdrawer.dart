@@ -1,4 +1,5 @@
 import 'package:digitalpanchayat/user/logout.dart';
+import 'package:digitalpanchayat/user/outter%20pages/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import '../user pages/addedfam.dart';
@@ -25,8 +26,12 @@ class _AppDrawerState extends State<AppDrawer> {
   void initState() {
     super.initState();
     // Decode JWT token and extract the necessary fields
-    Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
-    uname = jwtdecodetoken['uname'];
+    try {
+      Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
+      uname = jwtdecodetoken['uname'];
+    } catch (e) {
+      print('Token format is invalid: $e');
+    }
   }
 
   @override
@@ -170,6 +175,25 @@ class _AppDrawerState extends State<AppDrawer> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => addfam(token: widget.token),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.notifications, color: Colors.blue),
+            title: const Text(
+              'Notifications',
+              style: TextStyle(fontSize: 20),
+            ),
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationPage(
+                    token: widget.token,
+                    data: {},
+                  ),
                 ),
               );
             },

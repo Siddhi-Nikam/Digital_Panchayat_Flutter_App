@@ -84,7 +84,7 @@ class userdashboardState extends State<userdashboard> {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            "नाव : $uname\nगाव : $village\nमोबाईल नंबर : $mob\nजन्मतारीख : $DOB\nईमेल आयडी : $email",
+                            "नाव : $uname\nगाव : $village\nमोबाईल नंबर : $mob\nजन्मतारीख : ${DOB.split(' ')[0]}\nईमेल आयडी : $email",
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.white),
                           ),

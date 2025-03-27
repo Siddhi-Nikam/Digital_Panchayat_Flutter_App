@@ -81,7 +81,7 @@ class _NiradharState extends State<Niradhar> {
         if (fcmToken != null) {
           _sendPushNotification(
             fcmToken,
-            "जन्म दाखला अर्ज यशस्वी",
+            "निराधार नोंदणी अर्ज यशस्वी",
             "तुमचा अर्ज यशस्वीरित्या सबमिट झाला आहे.दाखला मिळविण्यासाठी ग्रामपंचायतीच्या संपर्कात रहा.",
           );
         }
