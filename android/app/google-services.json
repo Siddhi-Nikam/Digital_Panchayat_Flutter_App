@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "183644607988",
+    "project_id": "pushnotification-cfa89",
+    "storage_bucket": "pushnotification-cfa89.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183644607988:android:b2b22f01c2e6d13d5495a1",
+        "android_client_info": {
+          "package_name": "com.example.digitalpanchayat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMA786egkCpFU0ca3hIo7Mn0sOqpKl-a0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

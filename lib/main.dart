@@ -1,13 +1,18 @@
 import 'package:digitalpanchayat/comman%20pages/buttons.dart';
 import 'package:digitalpanchayat/configs/keys.dart';
+import 'package:digitalpanchayat/firebase_api.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-//import 'package:firebase_core/firebase_core.dart';
+
+import 'user/outter pages/notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = PublishKey;
   await Stripe.instance.applySettings();
+  await Firebase.initializeApp();
+  await FirebaseApi().initNotifications();
 
   runApp(const MyApp());
 }
@@ -17,22 +22,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: const buttons(),
+      routes: {'NotificationPage': (context) => NotificationPage()},
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const buttons(); //Entry point
   }
 }

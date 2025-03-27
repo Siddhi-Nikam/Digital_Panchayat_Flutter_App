@@ -32,6 +32,7 @@ class FilePickerRow extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 5),
                 child: Text(
                   fileName,
+                  overflow: TextOverflow.visible,
                   style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

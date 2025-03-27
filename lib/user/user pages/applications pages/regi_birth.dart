@@ -1,13 +1,17 @@
 import 'package:digitalpanchayat/configs/config.dart';
-import 'package:flutter/material.dart';
+import 'package:digitalpanchayat/firebase_api.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:jwt_decoder/jwt_decoder.dart';
+
 import '../../../reusable component/button.dart';
 import '../../../reusable component/file_picking.dart';
-import 'package:http/http.dart' as http;
 
 class RegiBirth extends StatefulWidget {
   final String token;
+
   const RegiBirth({
     super.key,
     required this.token,
@@ -23,11 +27,10 @@ class RegiBirthState extends State<RegiBirth> {
   late String uname;
   late String mob;
   late String adhar;
+
   @override
   void initState() {
     super.initState();
-
-    // Decode JWT token and extract the necessary fields
     try {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
       uname = jwtdecodetoken['uname'];
@@ -46,16 +49,14 @@ class RegiBirthState extends State<RegiBirth> {
     'hospitalCertificate': "No file selected",
     'parentAffidavit': "No file selected",
   };
-  FilePickerResult? result; // Make the result nullable
 
-  // Function to pick a single file
-  Future _pickFile(String key) async {
+  FilePickerResult? result;
+
+  Future<void> _pickFile(String key) async {
     result = await FilePicker.platform.pickFiles();
 
     if (result != null && result!.files.isNotEmpty) {
       PlatformFile file = result!.files.first;
-      print("Selected file path: ${file.path}"); // Debugging: Log the file path
-
       setState(() {
         _fileNames[key] = file.path ?? "No file selected";
       });
@@ -66,19 +67,40 @@ class RegiBirthState extends State<RegiBirth> {
     }
   }
 
+  Future<void> _sendPushNotification(
+      String token, String title, String body) async {
+    final url = Uri.parse("$BaseUrl/send-notification");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "token": token,
+          "title": title,
+          "body": body,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print("Notification sent successfully! $token ,$title, $body ");
+      } else {
+        print("Failed to send notification. Error: ${response.body}");
+      }
+    } catch (e) {
+      print("Error sending notification: $e");
+    }
+  }
+
   Future<void> _submitFiles() async {
     try {
-      // API endpoint
       final url = Uri.parse("$BaseUrl/registerbirth");
 
-      // Prepare the request
       var request = http.MultipartRequest('POST', url);
-      // Add form data fields
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields["addedBy"] = adhar;
 
-      // Add files to the request
       for (var entry in _fileNames.entries) {
         if (entry.value != "No file selected") {
           request.files.add(
@@ -86,7 +108,7 @@ class RegiBirthState extends State<RegiBirth> {
           );
         }
       }
-      // Send the request
+
       var response = await request.send();
 
       if (response.statusCode == 200) {
@@ -94,213 +116,124 @@ class RegiBirthState extends State<RegiBirth> {
           backgroundColor: Colors.blue,
           content: Text("Request submitted successfully"),
         ));
-        print(response.statusCode);
-        print("Files uploaded successfully!");
-        _fileNames.clear();
+
+        // Get the FCM token and send push notification
+        String? fcmToken = await FirebaseApi().getFCMToken();
+        if (fcmToken != null) {
+          _sendPushNotification(
+            fcmToken,
+            "जन्म नोंदणी यशस्वी",
+            "तुमचा अर्ज यशस्वीरित्या सबमिट झाला आहे.दाखला मिळविण्यासाठी ग्रामपंचायतीच्या संपर्कात रहा.",
+          );
+        }
       } else {
-        print("Failed to upload files. Error: ${response.reasonPhrase}");
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.red,
           content: Text("Error while submitting"),
         ));
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.red,
         content: Text("Error while submitting"),
       ));
-      print("Error while submitting : $e");
+      print("Error while submitting: $e");
     }
+  }
+
+  void showAlert(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "जन्म नोंदणी",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.blue,
-          iconTheme: IconThemeData(color: Colors.white),
+      appBar: AppBar(
+        title: const Text(
+          "जन्म नोंदणी",
+          style: TextStyle(color: Colors.white),
         ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      "अर्जदाराचे नाव",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    enabled: false,
-                    readOnly: true,
-                    initialValue: uname,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: uname,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      "अर्जदाराचा मोबाईल नंबर",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    readOnly: true,
-                    enabled: false,
-                    initialValue: mob,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: mob,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
-                //1
-                Padding(padding: EdgeInsets.only(top: 10)),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      "अर्जदाराचे ओळखपत्र",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                FilePickerRow(
-                  fileName: _fileNames["applicantId"]!,
-                  onPickFile: () {
-                    _pickFile("applicantId");
-                  },
-                ),
-                //2
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text("शाळा सोडल्याचा दाखला ",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-                FilePickerRow(
-                  fileName: _fileNames['LC']!,
-                  onPickFile: () {
-                    _pickFile("LC");
-                  },
-                ),
-                //3
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text("वडिलांचे ओळखपत्र",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-                FilePickerRow(
-                  fileName: _fileNames["fatherId"]!,
-                  onPickFile: () {
-                    _pickFile("fatherId");
-                  },
-                ),
-                //4
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text("आईचे ओळखपत्र",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-                FilePickerRow(
-                  fileName: _fileNames['motherId']!,
-                  onPickFile: () {
-                    _pickFile("motherId");
-                  },
-                ),
-                //5
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text("जन्म झालेल्या रुग्णालयाचे प्रमाणपत्र",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-                FilePickerRow(
-                  fileName: _fileNames['hospitalCertificate']!,
-                  onPickFile: () {
-                    _pickFile('hospitalCertificate');
-                  },
-                ),
-                //6
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text("जन्म रुग्णालयात झाला नसल्यास पालकांचे शपथपत्र",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-                FilePickerRow(
-                  fileName: _fileNames['parentAffidavit']!,
-                  onPickFile: () {
-                    _pickFile('parentAffidavit');
-                  },
-                ),
-
-                btn(
-                  text: 'सबमिट करा',
-                  onPressed: () {
-                    _submitFiles();
-                  },
-                  bg_color: Colors.blue,
-                  textcolor: Colors.white,
-                  fontSize: 25,
-                ),
-              ],
+        backgroundColor: Colors.blue,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
             ),
-          ),
-        ));
+            TextFormField(
+              readOnly: true,
+              initialValue: uname,
+              decoration: InputDecoration(
+                labelText: uname,
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              readOnly: true,
+              initialValue: mob,
+              decoration: InputDecoration(
+                labelText: mob,
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            _buildFilePickerRow("अर्जदाराचे ओळखपत्र", "applicantId"),
+            _buildFilePickerRow("शाळा सोडल्याचा दाखला", "LC"),
+            _buildFilePickerRow("वडिलांचे ओळखपत्र", "fatherId"),
+            _buildFilePickerRow("आईचे ओळखपत्र", "motherId"),
+            _buildFilePickerRow(
+                "रुग्णालयाचे प्रमाणपत्र", "hospitalCertificate"),
+            _buildFilePickerRow("शपथपत्र", "parentAffidavit"),
+            const SizedBox(height: 20),
+            btn(
+              text: 'सबमिट करा',
+              onPressed: () {
+                _submitFiles();
+              },
+              bg_color: Colors.blue,
+              textcolor: Colors.white,
+              fontSize: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilePickerRow(String label, String key) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        FilePickerRow(
+          fileName: _fileNames[key]!,
+          onPickFile: () {
+            _pickFile(key);
+          },
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
   }
 }
