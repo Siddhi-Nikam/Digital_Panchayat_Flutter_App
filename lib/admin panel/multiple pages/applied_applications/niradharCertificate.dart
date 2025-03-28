@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../../configs/config.dart';
-import '../uploadedFileforApplictiona/marriagecertificateUploadedfiles.dart.dart';
+import '../uploadedFileforApplictiona/niradharCertigficateUploadedFiles.dart';
 
 class Niradharcertificate extends StatefulWidget {
   const Niradharcertificate({super.key});
@@ -108,7 +108,10 @@ class _NiradharcertificateState extends State<Niradharcertificate> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ViewUploadedFiles(),
+                          builder: (context) =>
+                              Niradharcertigficateuploadedfiles(
+                            data: data[index]['addedBy'],
+                          ),
                         ),
                       );
                     },

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -6,7 +7,11 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../configs/config.dart';
 
 class Birthcertificateuploadedfiles extends StatefulWidget {
-  const Birthcertificateuploadedfiles({super.key});
+  final String data;
+  Birthcertificateuploadedfiles({
+    super.key,
+    required this.data,
+  });
 
   @override
   _BirthcertificateuploadedfilesState createState() =>
@@ -24,11 +29,11 @@ class _BirthcertificateuploadedfilesState
   List<Map<String, String>> uploadedFiles = [];
   bool isLoading = true;
   String errorMessage = "";
+  late String addedBy = widget.data;
 
   Future<void> fetchUploadedFiles() async {
     try {
-      final url =
-          Uri.parse("$BaseUrl/getbirthCertificateByAddedBy/7226 3704 2888");
+      final url = Uri.parse("$BaseUrl/getbirthCertificateByAddedBy/$addedBy");
       final response = await http.get(url);
 
       print("Response Status: ${response.statusCode}");
@@ -80,10 +85,25 @@ class _BirthcertificateuploadedfilesState
     }
   }
 
+  // Future<void> _openFile(String fileUrl) async {
+  //   // Always open Google regardless of the passed URL
+  //   final Uri url = Uri.parse("https://www.google.com");
+
+  //   if (await canLaunchUrl(url)) {
+  //     await launchUrl(url, mode: LaunchMode.inAppWebView);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text("Could not open Google")),
+  //     );
+  //   }
+  // }
+
   Future<void> _openFile(String fileUrl) async {
-    final Uri url = Uri.parse(fileUrl);
+    final Uri url =
+        Uri.parse(fileUrl.trim().replaceFirst("http://", "https://"));
+    print("fileUrl : $url");
     if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+      await launchUrl(url, mode: LaunchMode.inAppBrowserView);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Could not open the file: $fileUrl")),
@@ -129,7 +149,9 @@ class _BirthcertificateuploadedfilesState
                               color: Colors.blue,
                             ),
                             title: Text(
-                              filenames[index],
+                              index < filenames.length
+                                  ? filenames[index]
+                                  : "$filenames ${index + 1}",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

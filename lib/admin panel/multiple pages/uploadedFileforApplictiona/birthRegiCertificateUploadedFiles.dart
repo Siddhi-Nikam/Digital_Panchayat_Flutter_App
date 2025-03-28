@@ -85,7 +85,7 @@ class _BirthregicertificateuploadedfilesfileState
   Future<void> _openFile(String fileUrl) async {
     final Uri url = Uri.parse(fileUrl);
     if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+      await launchUrl(url, mode: LaunchMode.inAppBrowserView);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Could not open the file: $fileUrl")),
@@ -131,7 +131,9 @@ class _BirthregicertificateuploadedfilesfileState
                               color: Colors.blue,
                             ),
                             title: Text(
-                              filenames[index],
+                              index < filenames.length
+                                  ? filenames[index]
+                                  : "$filenames ${index + 1}",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

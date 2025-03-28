@@ -169,7 +169,7 @@ class PaidTaxState extends State {
                                                 ),
                                                 SizedBox(height: 5),
                                                 Text(
-                                                  "Payment Id : ${data[index]['payment_id']}",
+                                                  "Transaction Id : ${data[index]['payment_id']}",
                                                   style:
                                                       TextStyle(fontSize: 16),
                                                 ),

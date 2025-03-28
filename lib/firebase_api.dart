@@ -86,15 +86,19 @@ class FirebaseApi {
 
   // Get the FCM token
   Future<String?> getFCMToken() async {
-    String? token = await firebaseMessaging.getToken();
-    print("FCM Token: $token");
-    return token;
+    try {
+      String? token = await firebaseMessaging.getToken();
+      print("FCM Token: $token");
+      return token;
+    } catch (e) {
+      print("Error fetching FCM Token: $e");
+      return null;
+    }
   }
 
   Future<void> initNotifications() async {
     await firebaseMessaging.requestPermission();
-    final fCMToken = await firebaseMessaging.getToken();
-    print(fCMToken);
+    getFCMToken();
     initPushNotification();
     initLocalNotification();
   }

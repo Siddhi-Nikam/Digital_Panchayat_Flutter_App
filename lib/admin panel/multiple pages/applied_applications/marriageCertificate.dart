@@ -107,7 +107,9 @@ class _MarriagecertificateState extends State<Marriagecertificate> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ViewUploadedFiles(),
+                          builder: (context) => ViewUploadedFiles(
+                            data: data[index]['addedBy'],
+                          ),
                         ),
                       );
                     },

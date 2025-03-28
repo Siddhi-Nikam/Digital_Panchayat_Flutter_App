@@ -6,7 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../configs/config.dart';
 
 class Eightauploadedfiles extends StatefulWidget {
-  const Eightauploadedfiles({super.key});
+  final String data;
+  Eightauploadedfiles({super.key, required this.data});
 
   @override
   _EightauploadedfilesState createState() => _EightauploadedfilesState();
@@ -22,10 +23,11 @@ class _EightauploadedfilesState extends State<Eightauploadedfiles> {
   List<Map<String, String>> uploadedFiles = [];
   bool isLoading = true;
   String errorMessage = "";
+  late String addedBy = widget.data;
 
   Future<void> fetchUploadedFiles() async {
     try {
-      final url = Uri.parse("$BaseUrl/geteightAByAddedBy/7226 3704 2888");
+      final url = Uri.parse("$BaseUrl/geteightAByAddedBy/$addedBy");
       final response = await http.get(url);
 
       print("Response Status: ${response.statusCode}");
@@ -80,7 +82,7 @@ class _EightauploadedfilesState extends State<Eightauploadedfiles> {
   Future<void> _openFile(String fileUrl) async {
     final Uri url = Uri.parse(fileUrl);
     if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+      await launchUrl(url, mode: LaunchMode.inAppBrowserView);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Could not open the file: $fileUrl")),
@@ -126,7 +128,9 @@ class _EightauploadedfilesState extends State<Eightauploadedfiles> {
                               color: Colors.blue,
                             ),
                             title: Text(
-                              filenames[index],
+                              index < filenames.length
+                                  ? filenames[index]
+                                  : "Unknown File",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),

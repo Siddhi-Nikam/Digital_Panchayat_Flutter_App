@@ -20,7 +20,7 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  late String uname = "";
+  late String uname = 'User'; // Provide a default value
 
   @override
   void initState() {
@@ -28,7 +28,8 @@ class _AppDrawerState extends State<AppDrawer> {
     // Decode JWT token and extract the necessary fields
     try {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
-      uname = jwtdecodetoken['uname'];
+      uname = jwtdecodetoken['uname'] ??
+          'User'; // Fallback to default if 'uname' is null
     } catch (e) {
       print('Token format is invalid: $e');
     }

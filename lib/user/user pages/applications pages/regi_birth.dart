@@ -24,6 +24,7 @@ class RegiBirth extends StatefulWidget {
 }
 
 class RegiBirthState extends State<RegiBirth> {
+// late String id;
   late String uname;
   late String mob;
   late String adhar;
@@ -33,6 +34,7 @@ class RegiBirthState extends State<RegiBirth> {
     super.initState();
     try {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
+      // id = jwtdecodetoken['id'];
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
       adhar = jwtdecodetoken['adhar'];
@@ -97,6 +99,7 @@ class RegiBirthState extends State<RegiBirth> {
       final url = Uri.parse("$BaseUrl/registerbirth");
 
       var request = http.MultipartRequest('POST', url);
+      //request.fields['id'] = id;
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields["addedBy"] = adhar;
@@ -179,23 +182,21 @@ class RegiBirthState extends State<RegiBirth> {
             SizedBox(
               height: 10,
             ),
-            TextFormField(
-              readOnly: true,
-              initialValue: uname,
-              decoration: InputDecoration(
-                labelText: uname,
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              readOnly: true,
-              initialValue: mob,
-              decoration: InputDecoration(
-                labelText: mob,
-                border: OutlineInputBorder(),
-              ),
-            ),
+            // TextFormField(
+            //   readOnly: true,
+            //   decoration: InputDecoration(
+            //     // labelText: uname.isNotEmpty ? uname : uname,
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),
+            // const SizedBox(height: 16),
+            // TextFormField(
+            //   readOnly: true,
+            //   decoration: InputDecoration(
+            //     // labelText: mob.isNotEmpty ? mob : uname,
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),
             const SizedBox(height: 10),
             _buildFilePickerRow("अर्जदाराचे ओळखपत्र", "applicantId"),
             _buildFilePickerRow("शाळा सोडल्याचा दाखला", "LC"),

@@ -104,8 +104,8 @@ class AdminDrawer extends StatelessWidget {
               );
             },
           ),
-          Expanded(
-            child: SizedBox.expand(),
+          SizedBox(
+            height: 100,
           ),
           ListTile(
             tileColor: Colors.blue,

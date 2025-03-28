@@ -107,7 +107,9 @@ class _deathCertificateState extends State<deathCertificate> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Deathcertificateuploadedfile(),
+                          builder: (context) => Deathcertificateuploadedfile(
+                            data: data[index]['addedBy'],
+                          ),
                         ),
                       );
                     },

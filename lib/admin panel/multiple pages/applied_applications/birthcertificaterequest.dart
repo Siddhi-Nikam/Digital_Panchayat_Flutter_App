@@ -107,7 +107,9 @@ class _BirthCertificatereqestState extends State<BirthCertificaterequest> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Birthcertificateuploadedfiles(),
+                          builder: (context) => Birthcertificateuploadedfiles(
+                            data: data[index]['addedBy'],
+                          ),
                         ),
                       );
                     },

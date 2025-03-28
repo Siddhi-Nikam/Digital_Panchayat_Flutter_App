@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 import '../../../configs/config.dart';
 import '../uploadedFileforApplictiona/EightAUploadedFiles.dart';
 
 class Eightacertificate extends StatefulWidget {
-  const Eightacertificate({super.key});
+  Eightacertificate({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _EightacertificateState createState() => _EightacertificateState();
@@ -107,7 +111,9 @@ class _EightacertificateState extends State<Eightacertificate> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Eightauploadedfiles(),
+                          builder: (context) => Eightauploadedfiles(
+                            data: data[index]['addedBy'],
+                          ),
                         ),
                       );
                     },
