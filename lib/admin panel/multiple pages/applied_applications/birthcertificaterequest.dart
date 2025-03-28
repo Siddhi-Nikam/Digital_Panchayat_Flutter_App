@@ -108,7 +108,7 @@ class _BirthCertificatereqestState extends State<BirthCertificaterequest> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => Birthcertificateuploadedfiles(
-                            data: data[index]['addedBy'],
+                            data: data[index]['applicationId'] ?? '',
                           ),
                         ),
                       );

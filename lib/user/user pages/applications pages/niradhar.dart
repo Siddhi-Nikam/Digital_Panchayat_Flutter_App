@@ -20,6 +20,8 @@ class _NiradharState extends State<Niradhar> {
   late String uname;
   late String mob;
   late String adhar;
+  late final String applicationId =
+      DateTime.now().millisecondsSinceEpoch.toString();
   @override
   void initState() {
     super.initState();
@@ -100,7 +102,7 @@ class _NiradharState extends State<Niradhar> {
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
-
+      request.fields['applicationId'] = applicationId;
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields["addedBy"] = adhar;
@@ -117,11 +119,19 @@ class _NiradharState extends State<Niradhar> {
       var response = await request.send();
 
       if (response.statusCode == 200) {
+        print("Files uploaded successfully!");
+        String? fcmToken = await FirebaseApi().getFCMToken();
+        if (fcmToken != null) {
+          _sendPushNotification(
+            fcmToken,
+            "जन्म दाखला अर्ज यशस्वी",
+            "तुमचा अर्ज यशस्वीरित्या सबमिट झाला आहे.दाखला मिळविण्यासाठी ग्रामपंचायतीच्या संपर्कात रहा.",
+          );
+        }
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
           content: Text("Request submitted successfully"),
         ));
-        print("Files uploaded successfully!");
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
@@ -199,6 +209,21 @@ class _NiradharState extends State<Niradhar> {
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: mob,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  readOnly: true,
+                  enabled: false,
+                  initialValue: applicationId,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    labelText: 'ApplicationId',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),

@@ -20,6 +20,8 @@ class _utaraPageState extends State<utaraPage> {
   late String uname;
   late String mob;
   late String adhar;
+  late final String applicationId =
+      DateTime.now().millisecondsSinceEpoch.toString();
   @override
   void initState() {
     super.initState();
@@ -100,6 +102,7 @@ class _utaraPageState extends State<utaraPage> {
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
+      request.fields['applicationId'] = applicationId;
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields['addedBy'] = adhar;
@@ -117,6 +120,15 @@ class _utaraPageState extends State<utaraPage> {
 
       if (response.statusCode == 200) {
         print("Files uploaded successfully!");
+        String? fcmToken = await FirebaseApi().getFCMToken();
+        if (fcmToken != null) {
+          _sendPushNotification(
+            fcmToken,
+            "जन्म दाखला अर्ज यशस्वी",
+            "तुमचा अर्ज यशस्वीरित्या सबमिट झाला आहे.दाखला मिळविण्यासाठी ग्रामपंचायतीच्या संपर्कात रहा.",
+          );
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.blue,
           content: Text("Request submitted successfully"),
@@ -198,6 +210,21 @@ class _utaraPageState extends State<utaraPage> {
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: mob,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  readOnly: true,
+                  enabled: false,
+                  initialValue: applicationId,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    labelText: "ApplicationId",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),

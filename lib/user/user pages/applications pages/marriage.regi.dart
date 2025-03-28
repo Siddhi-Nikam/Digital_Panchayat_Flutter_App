@@ -28,6 +28,8 @@ class Marriage_regiState extends State<Marriage_regi> {
   late String uname;
   late String mob;
   late String adhar;
+  late final String applicationId =
+      DateTime.now().millisecondsSinceEpoch.toString();
   @override
   void initState() {
     super.initState();
@@ -110,7 +112,7 @@ class Marriage_regiState extends State<Marriage_regi> {
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
-
+      request.fields['applicationId'] = applicationId;
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields["addedBy"] = adhar;
@@ -209,6 +211,21 @@ class Marriage_regiState extends State<Marriage_regi> {
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: mob,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  readOnly: true,
+                  enabled: false,
+                  initialValue: applicationId,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    labelText: "ApplicationId",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),

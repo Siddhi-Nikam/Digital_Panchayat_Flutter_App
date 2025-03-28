@@ -28,13 +28,15 @@ class RegiBirthState extends State<RegiBirth> {
   late String uname;
   late String mob;
   late String adhar;
+  late final String applicationId =
+      DateTime.now().millisecondsSinceEpoch.toString();
 
   @override
   void initState() {
     super.initState();
     try {
       Map<String, dynamic> jwtdecodetoken = JwtDecoder.decode(widget.token);
-      // id = jwtdecodetoken['id'];
+
       uname = jwtdecodetoken['uname'];
       mob = jwtdecodetoken['mob'];
       adhar = jwtdecodetoken['adhar'];
@@ -99,7 +101,7 @@ class RegiBirthState extends State<RegiBirth> {
       final url = Uri.parse("$BaseUrl/registerbirth");
 
       var request = http.MultipartRequest('POST', url);
-      //request.fields['id'] = id;
+      request.fields['applicationId'] = applicationId;
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields["addedBy"] = adhar;
@@ -182,13 +184,14 @@ class RegiBirthState extends State<RegiBirth> {
             SizedBox(
               height: 10,
             ),
-            // TextFormField(
-            //   readOnly: true,
-            //   decoration: InputDecoration(
-            //     // labelText: uname.isNotEmpty ? uname : uname,
-            //     border: OutlineInputBorder(),
-            //   ),
-            // ),
+            TextFormField(
+              readOnly: true,
+              initialValue: applicationId,
+              decoration: InputDecoration(
+                label: Text("Application ID"),
+                border: OutlineInputBorder(),
+              ),
+            ),
             // const SizedBox(height: 16),
             // TextFormField(
             //   readOnly: true,

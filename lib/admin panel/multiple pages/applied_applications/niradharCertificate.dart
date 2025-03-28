@@ -110,7 +110,7 @@ class _NiradharcertificateState extends State<Niradharcertificate> {
                         MaterialPageRoute(
                           builder: (context) =>
                               Niradharcertigficateuploadedfiles(
-                            data: data[index]['addedBy'],
+                            data: data[index]['applicationId'],
                           ),
                         ),
                       );

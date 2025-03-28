@@ -25,10 +25,11 @@ class _DeathcertificateuploadedfileState
   List<Map<String, String>> uploadedFiles = [];
   bool isLoading = true;
   String errorMessage = "";
-  late String addedBy = widget.data;
+  late String applicationId = widget.data;
   Future<void> fetchUploadedFiles() async {
     try {
-      final url = Uri.parse("$BaseUrl/getdeathcertificateByAddedBy/$addedBy");
+      final url =
+          Uri.parse("$BaseUrl/getdeathcertificateByAddedBy/$applicationId");
       final response = await http.get(url);
 
       print("Response Status: ${response.statusCode}");

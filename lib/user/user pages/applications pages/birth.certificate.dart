@@ -29,6 +29,8 @@ class BirthCertificateState extends State<BirthCertificate> {
   late String uname;
   late String mob;
   late String adhar;
+  late final String applicationId =
+      DateTime.now().millisecondsSinceEpoch.toString();
   @override
   void initState() {
     super.initState();
@@ -102,6 +104,7 @@ class BirthCertificateState extends State<BirthCertificate> {
 
       // Prepare the request
       var request = http.MultipartRequest('POST', url);
+      request.fields['applicationId'] = applicationId;
       request.fields['uname'] = uname;
       request.fields['mob'] = mob;
       request.fields['addedBy'] = adhar;
@@ -175,6 +178,21 @@ class BirthCertificateState extends State<BirthCertificate> {
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   labelText: uname,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                enabled: false,
+                readOnly: true,
+                initialValue: applicationId,
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  labelText: "ApplicationId",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

@@ -108,7 +108,7 @@ class _MarriagecertificateState extends State<Marriagecertificate> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ViewUploadedFiles(
-                            data: data[index]['addedBy'],
+                            data: data[index]['applicationId'],
                           ),
                         ),
                       );

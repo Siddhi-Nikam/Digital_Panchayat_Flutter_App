@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../configs/config.dart';
 import '../uploadedFileforApplictiona/EightAUploadedFiles.dart';
 
@@ -112,7 +110,7 @@ class _EightacertificateState extends State<Eightacertificate> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => Eightauploadedfiles(
-                            data: data[index]['addedBy'],
+                            data: data[index]['applicationId'],
                           ),
                         ),
                       );

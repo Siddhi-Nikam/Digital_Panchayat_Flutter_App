@@ -108,7 +108,7 @@ class _deathCertificateState extends State<deathCertificate> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => Deathcertificateuploadedfile(
-                            data: data[index]['addedBy'],
+                            data: data[index]['applicationId'],
                           ),
                         ),
                       );
