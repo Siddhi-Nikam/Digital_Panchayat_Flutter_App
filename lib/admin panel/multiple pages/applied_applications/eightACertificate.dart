@@ -5,9 +5,9 @@ import '../../../configs/config.dart';
 import '../uploadedFileforApplictiona/EightAUploadedFiles.dart';
 
 class Eightacertificate extends StatefulWidget {
-  Eightacertificate({
-    Key? key,
-  }) : super(key: key);
+  const Eightacertificate({
+    super.key,
+  });
 
   @override
   _EightacertificateState createState() => _EightacertificateState();

@@ -20,8 +20,8 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  late String uname;
-  late String mob;
+  late String uname = '';
+  late String mob = '';
   Map<String, dynamic>? intentPaymentData;
   final TextEditingController _amountController = TextEditingController();
 
@@ -90,6 +90,14 @@ class _PaymentPageState extends State<PaymentPage> {
           });
         } else {
           payment_confirmation();
+          String? fcmToken = await FirebaseApi().getFCMToken();
+          if (fcmToken != null) {
+            _sendPushNotification(
+              fcmToken,
+              "Payment Successful",
+              "Payment Successfully Done to Grampanchayat",
+            );
+          }
         }
       }).onError((errorMsg, sTrace) {
         if (kDebugMode) {
@@ -133,14 +141,6 @@ class _PaymentPageState extends State<PaymentPage> {
       );
 
       if (responseFromStripeAPI.statusCode == 200) {
-        String? fcmToken = await FirebaseApi().getFCMToken();
-        if (fcmToken != null) {
-          _sendPushNotification(
-            fcmToken,
-            "Payment Successful",
-            "Payment Successfully Done to Grampanchayat",
-          );
-        }
         return jsonDecode(responseFromStripeAPI.body);
       } else {
         print("Failed to create payment intent: ${responseFromStripeAPI.body}");

@@ -7,7 +7,7 @@ import '../../../configs/config.dart';
 
 class Niradharcertigficateuploadedfiles extends StatefulWidget {
   final String data;
-  Niradharcertigficateuploadedfiles({super.key, required this.data});
+  const Niradharcertigficateuploadedfiles({super.key, required this.data});
 
   @override
   _NiradharcertigficateuploadedfilesState createState() =>

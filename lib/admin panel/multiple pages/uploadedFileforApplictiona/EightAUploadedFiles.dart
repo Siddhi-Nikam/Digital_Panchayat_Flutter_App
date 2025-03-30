@@ -7,7 +7,7 @@ import '../../../configs/config.dart';
 
 class Eightauploadedfiles extends StatefulWidget {
   final String data;
-  Eightauploadedfiles({super.key, required this.data});
+  const Eightauploadedfiles({super.key, required this.data});
 
   @override
   _EightauploadedfilesState createState() => _EightauploadedfilesState();

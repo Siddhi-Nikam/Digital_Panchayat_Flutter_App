@@ -7,7 +7,7 @@ import '../../../configs/config.dart';
 
 class Deathcertificateuploadedfile extends StatefulWidget {
   final String data;
-  Deathcertificateuploadedfile({super.key, required this.data});
+  const Deathcertificateuploadedfile({super.key, required this.data});
 
   @override
   _DeathcertificateuploadedfileState createState() =>

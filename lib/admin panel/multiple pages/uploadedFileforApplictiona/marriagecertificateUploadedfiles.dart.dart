@@ -7,7 +7,7 @@ import '../../../configs/config.dart';
 
 class ViewUploadedFiles extends StatefulWidget {
   final String data;
-  ViewUploadedFiles({super.key, required this.data});
+  const ViewUploadedFiles({super.key, required this.data});
 
   @override
   _ViewUploadedFilesState createState() => _ViewUploadedFilesState();

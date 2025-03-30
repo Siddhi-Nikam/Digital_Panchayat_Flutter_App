@@ -8,7 +8,7 @@ import '../../../configs/config.dart';
 
 class Birthcertificateuploadedfiles extends StatefulWidget {
   final String data;
-  Birthcertificateuploadedfiles({
+  const Birthcertificateuploadedfiles({
     super.key,
     required this.data,
   });
