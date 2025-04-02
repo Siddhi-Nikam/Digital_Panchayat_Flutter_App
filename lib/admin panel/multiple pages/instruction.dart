@@ -20,13 +20,21 @@ class instructionsState extends State<instructions> {
 
   void showSuccessToast() {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text("Sended Successfully"),
+      backgroundColor: Colors.blue,
+      content: Text(
+        "Sended Successfully",
+        style: TextStyle(color: Colors.white),
+      ),
     ));
   }
 
   void showerrortoast() {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text("Something went wrong"),
+      backgroundColor: Colors.blue,
+      content: Text(
+        "Something went wrong",
+        style: TextStyle(color: Colors.white),
+      ),
     ));
   }
 

@@ -160,63 +160,8 @@ class Marriage_regiState extends State<Marriage_regi> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "अर्जदाराचे नाव",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  enabled: false,
-                  readOnly: true,
-                  initialValue: uname,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    labelText: uname,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 10),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "अर्जदाराचा मोबाईल नंबर",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  readOnly: true,
-                  enabled: false,
-                  initialValue: mob,
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    labelText: mob,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
-              ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(

@@ -19,13 +19,21 @@ class serviceState extends State<services> {
   final TextEditingController _decsrpcontroller = TextEditingController();
   void showSuccessToast() {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text("service added successfully"),
+      backgroundColor: Colors.blue,
+      content: Text(
+        "service added successfully",
+        style: TextStyle(color: Colors.white),
+      ),
     ));
   }
 
   void showerrortoast() {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text("Something went wrong"),
+      backgroundColor: Colors.blue,
+      content: Text(
+        "Something went wrong",
+        style: TextStyle(color: Colors.white),
+      ),
     ));
   }
 
