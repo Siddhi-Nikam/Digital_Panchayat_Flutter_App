@@ -118,8 +118,8 @@ class _EightacertificateState extends State<Eightacertificate> {
                   );
                 },
                 separatorBuilder: (context, index) => const Divider(
-                  color: Colors.grey, // Customize the divider color
-                  thickness: 1, // Customize the divider thickness
+                  color: Colors.grey,
+                  thickness: 1,
                 ),
               );
             }

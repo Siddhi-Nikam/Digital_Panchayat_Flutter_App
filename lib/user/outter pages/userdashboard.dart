@@ -39,64 +39,66 @@ class userdashboardState extends State<userdashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 246, 248, 249),
-      appBar: AppBar(
-        title: const Text(
-          'वापरकर्ता डॅशबोर्ड',
-          style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 246, 248, 249),
+        appBar: AppBar(
+          title: const Text(
+            'वापरकर्ता डॅशबोर्ड',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.blue,
+          iconTheme: IconThemeData(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
-      drawer: AppDrawer(
-        token: widget.token,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 50,
-                left: 10,
-                right: 10,
-              ),
-              child: SizedBox(
-                height: 350,
-                width: double.infinity,
-                child: Card(
-                  elevation: 10.0,
-                  shadowColor: Colors.black,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.person,
-                              color: Colors.grey.shade800,
-                              size: 50,
+        drawer: AppDrawer(
+          token: widget.token,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 50,
+                  left: 10,
+                  right: 10,
+                ),
+                child: SizedBox(
+                  height: 350,
+                  width: double.infinity,
+                  child: Card(
+                    elevation: 10.0,
+                    shadowColor: Colors.black,
+                    color: Colors.blue,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.white,
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.grey.shade800,
+                                size: 50,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "नाव : $uname\nगाव : $village\nमोबाईल नंबर : $mob\nजन्मतारीख : ${DOB.split(' ')[0]}\nईमेल आयडी : $email",
-                            style: const TextStyle(
-                                fontSize: 15, color: Colors.white),
-                          ),
-                        ],
+                            const SizedBox(height: 10),
+                            Text(
+                              "नाव : $uname\nगाव : $village\nमोबाईल नंबर : $mob\nजन्मतारीख : ${DOB.split(' ')[0]}\nईमेल आयडी : $email",
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 50),
-          ],
+              const SizedBox(height: 50),
+            ],
+          ),
         ),
       ),
     );

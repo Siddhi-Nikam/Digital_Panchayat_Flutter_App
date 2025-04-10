@@ -92,7 +92,7 @@ class _UserregisterState extends State<Userregister> {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       backgroundColor: Colors.blue,
       content: Text(
-          "Check all fields \nadhar number & mobile number shoud be unique or already exist"),
+          "Check all fields \nadhar number & mobile number should be unique or already exist"),
       duration: Duration(seconds: 4),
     ));
   }
@@ -162,7 +162,7 @@ class _UserregisterState extends State<Userregister> {
         value.isEmpty ||
         !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
             .hasMatch(value)) {
-      return 'Please enter a valid password';
+      return 'Required special char , numbers ,capital letters';
     }
     return null;
   }
